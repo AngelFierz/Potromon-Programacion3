@@ -85,7 +85,7 @@ public class Entrenador {
         try {
             Connection conexion = Conexion.obtener();
             Statement statement = conexion.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT id_responsable, nombre, apodo, imagen FROM entrenador");
+            ResultSet rs = statement.executeQuery("SELECT id, nombre, apodo, imagen FROM entrenador");
             while(rs.next()){
                 Entrenador r = new Entrenador();
                 r.setId(rs.getInt(1));

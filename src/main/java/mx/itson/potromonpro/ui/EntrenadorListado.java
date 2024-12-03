@@ -4,6 +4,11 @@
  */
 package mx.itson.potromonpro.ui;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import mx.itson.potromonpro.entidades.Entrenador;
+import mx.itson.potromonpro.entidades.Potromon;
+
 /**
  *
  * @author dzlan
@@ -27,31 +32,80 @@ public class EntrenadorListado extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblEntrenador = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Lista de entrenadores");
+
+        tblEntrenador.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Nombre", "Apodo"
+            }
+        ));
+        jScrollPane1.setViewportView(tblEntrenador);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(jLabel1)
-                .addContainerGap(414, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addContainerGap(336, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+         cargarTable();
+        tblEntrenador.removeColumn(tblEntrenador.getColumnModel().getColumn(0));
+    }//GEN-LAST:event_formWindowOpened
+
+    
+        private void cargarTable(){
+        List<Entrenador> entrenadores = Entrenador.getAll();
+        DefaultTableModel modeloTabla = (DefaultTableModel)tblEntrenador.getModel();
+        modeloTabla.setRowCount(0);
+        for(Entrenador r : entrenadores) {
+            modeloTabla.addRow(new Object[] {
+                    r.getId(),
+                    r.getNombre(), 
+                    r.getApodo()
+            });
+            }
+        }  
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -90,5 +144,7 @@ public class EntrenadorListado extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblEntrenador;
     // End of variables declaration//GEN-END:variables
 }
