@@ -148,7 +148,7 @@ public class PotromonListado extends javax.swing.JFrame {
             modeloTabla.addRow(new Object[] {
                     r.getId(),
                     r.getNombre(), 
-                    r.getEntrenador_id(),
+                    r.getEntrenador(),
                     r.getPuntaje()
             });
             }
