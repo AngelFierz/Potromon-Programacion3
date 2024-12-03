@@ -13,34 +13,10 @@ import mx.itson.potromonpro.persistencia.Conexion;
 
 /**
  *
- * @author dzlan
+ * @author Akane
  */
 public class Potromon {
 
-    /**
-     * @return the entrenador_id
-     */
-    public int getEntrenador_id() {
-        return entrenador_id;
-    }
-
-    /**
-     * @param entrenador_id the entrenador_id to set
-     */
-    public void setEntrenador_id(int entrenador_id) {
-        this.entrenador_id = entrenador_id;
-    }
-
-    
-    //Falta imagen y entrenador id, no sé qpd todavía 
-    private int id;
-    private String nombre;
-    private String descripcion;
-    private String lista_habiliades; 
-    private int entrenador_id;
-    private int puntaje; 
-    
-    
     /**
      * @return the id
      */
@@ -84,17 +60,31 @@ public class Potromon {
     }
 
     /**
-     * @return the lista_habiliades
+     * @return the listahabilidades
      */
-    public String getLista_habiliades() {
-        return lista_habiliades;
+    public String getListahabilidades() {
+        return listahabilidades;
     }
 
     /**
-     * @param lista_habiliades the lista_habiliades to set
+     * @param listahabilidades the listahabilidades to set
      */
-    public void setLista_habiliades(String lista_habiliades) {
-        this.lista_habiliades = lista_habiliades;
+    public void setListahabilidades(String listahabilidades) {
+        this.listahabilidades = listahabilidades;
+    }
+
+    /**
+     * @return the entrenador
+     */
+    public Entrenador getEntrenador() {
+        return entrenador;
+    }
+
+    /**
+     * @param entrenador the entrenador to set
+     */
+    public void setEntrenador(Entrenador entrenador) {
+        this.entrenador = entrenador;
     }
 
     /**
@@ -110,28 +100,56 @@ public class Potromon {
     public void setPuntaje(int puntaje) {
         this.puntaje = puntaje;
     }
+
+    /**
+     * @return the image
+     */
+    public String getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    
+    private int id;
+    private String nombre;
+    private String descripcion;
+    private String listahabilidades; 
+    private Entrenador entrenador;
+    private int puntaje;
+    private String image;
     
     
-        public static List<Potromon> getAll(){
+    public static List<Potromon> getAll(){
         List<Potromon> potromones = new ArrayList<>();
-        
+
         try{
-            
+
             Connection conexion = Conexion.obtener();
             Statement statement = conexion.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT id, nombre, entrenador_id, puntaje FROM potromon");
+            ResultSet rs = statement.executeQuery("SELECT id, nombre, descripcion, lista_habilidades, imagen, entrenador_id, puntaje FROM potromon");
             while(rs.next()){
-                Potromon r = new Potromon();
-                r.setId(rs.getInt(1));
-                r.setNombre(rs.getString(2));
-                r.setEntrenador_id(rs.getInt(3));
-                r.setPuntaje(rs.getInt(4)); 
-                potromones.add(r);
+                Potromon p = new Potromon();
+                p.setId(rs.getInt(1));
+                p.setNombre(rs.getString(2));
+                p.setDescripcion(rs.getString(3));                                            
+                p.setListahabilidades(rs.getString(4));
+                p.setImage(rs.getString(5));
+                
+                Entrenador e = Entrenador.getById(rs.getInt(6));
+                p.setEntrenador(e);            
+                
+                p.setPuntaje(rs.getInt(7)); 
+                potromones.add(p);
             }
         } catch (Exception ex) {
-                System.err.println("Ocurrió un error: " + ex.getMessage());  
+                System.err.println("Ocurrió un error: " + ex.getMessage());
                     }
-    return potromones;  
-
+    return potromones;
 }
 }
