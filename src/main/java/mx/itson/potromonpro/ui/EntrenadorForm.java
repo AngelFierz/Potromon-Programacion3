@@ -13,10 +13,9 @@ public class EntrenadorForm extends javax.swing.JDialog {
     /**
      * Creates new form EntrenadoresForm
      */
-    public EntrenadorForm(java.awt.Frame parent, boolean modal) {
+    public EntrenadorForm(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
-        initComponents();
-    }
+        initComponents();}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,7 +73,7 @@ public class EntrenadorForm extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                EntrenadorForm dialog = new EntrenadorForm(new javax.swing.JFrame(), true);
+                EntrenadorForm dialog = new EntrenadorForm(new javax.swing.JFrame(), true,0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -84,8 +83,9 @@ public class EntrenadorForm extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+    }
 }
