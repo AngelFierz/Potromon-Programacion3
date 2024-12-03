@@ -147,7 +147,7 @@ public class Entrenador {
     }
     
     
-        public static boolean edit(int id, String nombre, String apodo, String imagen){
+        public static boolean edit(String nombre, String apodo, String imagen, int id){
         boolean resultado = false;
         try{
             Connection conexion = Conexion.obtener();

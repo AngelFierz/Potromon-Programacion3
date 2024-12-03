@@ -36,7 +36,7 @@ public class EntrenadorListado extends javax.swing.JFrame {
         tblEntrenador = new javax.swing.JTable();
         btnAgregar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
-        btnEliminar2 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -74,10 +74,10 @@ public class EntrenadorListado extends javax.swing.JFrame {
             }
         });
 
-        btnEliminar2.setText("Eliminar");
-        btnEliminar2.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminar2ActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -95,7 +95,7 @@ public class EntrenadorListado extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnEliminar2)
+                            .addComponent(btnEliminar)
                             .addComponent(btnEditar)
                             .addComponent(btnAgregar))))
                 .addContainerGap(68, Short.MAX_VALUE))
@@ -115,7 +115,7 @@ public class EntrenadorListado extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEditar)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEliminar2)))
+                        .addComponent(btnEliminar)))
                 .addContainerGap(64, Short.MAX_VALUE))
         );
 
@@ -145,9 +145,9 @@ public class EntrenadorListado extends javax.swing.JFrame {
         cargarTable();
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void btnEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar2ActionPerformed
-//falta codigo
-    }//GEN-LAST:event_btnEliminar2ActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+//falta codigo+
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     
         private void cargarTable(){
@@ -206,8 +206,6 @@ public class EntrenadorListado extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnEliminar1;
-    private javax.swing.JButton btnEliminar2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblEntrenador;

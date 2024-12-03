@@ -4,18 +4,31 @@
  */
 package mx.itson.potromonpro.ui;
 
+import javax.swing.JOptionPane;
+import mx.itson.potromonpro.entidades.Entrenador;
+
 /**
  *
  * @author dzlan
  */
 public class EntrenadorForm extends javax.swing.JDialog {
 
+int id;
     /**
      * Creates new form EntrenadoresForm
      */
     public EntrenadorForm(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
-        initComponents();}
+        initComponents();
+
+        this.id = id;
+        if(id != 0) {
+            Entrenador r = Entrenador.getById(id);
+            txtNombre.setText(r.getNombre());
+            txtApodo.setText(r.getApodo());
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,6 +45,7 @@ public class EntrenadorForm extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         txtApodo = new javax.swing.JTextField();
         btnAceptar = new javax.swing.JButton();
+        btnImagen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -40,9 +54,28 @@ public class EntrenadorForm extends javax.swing.JDialog {
 
         jLabel2.setText("Nombre");
 
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Apodo");
 
+        txtApodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtApodoActionPerformed(evt);
+            }
+        });
+
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
+
+        btnImagen.setText("Seleccionar archivo...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -55,16 +88,18 @@ public class EntrenadorForm extends javax.swing.JDialog {
                         .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1)
-                            .addComponent(txtNombre)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel2))
-                            .addComponent(txtApodo, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnImagen)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel1)
+                                .addComponent(txtNombre)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(12, 12, 12)
+                                    .addComponent(jLabel2))
+                                .addComponent(txtApodo, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)))))
                 .addContainerGap(54, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
                 .addGap(37, 37, 37))
         );
@@ -81,13 +116,55 @@ public class EntrenadorForm extends javax.swing.JDialog {
                 .addComponent(jLabel3)
                 .addGap(27, 27, 27)
                 .addComponent(txtApodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
-                .addComponent(btnAceptar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(btnAceptar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(btnImagen)))
                 .addContainerGap(105, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        String nombre = txtNombre.getText();
+        String apodo = txtApodo.getText();
+        String imagen = btnImagen.getText();
+
+
+        
+        /**
+         * Verificacioón de ID si es 0 para saber si es una edición o un nuevo registro.
+         */
+        
+        boolean resultado = this.id == 0 ?
+            Entrenador.save(nombre, apodo, imagen):
+            Entrenador.edit(nombre, apodo, imagen, id) ;
+        
+        /**
+         * Si el resultado es exitoso, se muestra un mensaje de confirmación para el usuario, de lo contrario se muestra mensaje de error.
+         */
+        
+        if (resultado){
+        JOptionPane.showMessageDialog(this, "El registro se guardo correctamente", "Registro guardado", JOptionPane.INFORMATION_MESSAGE);     
+        dispose(); } 
+        else {
+        JOptionPane.showMessageDialog(this, "Hubo un error al intentar guardar el registro", "Error al guardar", JOptionPane.ERROR_MESSAGE);        
+    }                                          
+                                              
+
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+       
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void txtApodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApodoActionPerformed
+      
+    }//GEN-LAST:event_txtApodoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,10 +207,11 @@ public class EntrenadorForm extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
-    
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnImagen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
