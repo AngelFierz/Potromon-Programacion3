@@ -4,6 +4,10 @@
  */
 package mx.itson.potromonpro.ui;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import mx.itson.potromonpro.entidades.Potromon;
+
 /**
  *
  * @author dzlan
@@ -34,6 +38,11 @@ public class PotromonListado extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Lista de Potromon");
@@ -125,6 +134,30 @@ public class PotromonListado extends javax.swing.JFrame {
         //jjj
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        cargarTable();
+        tblPotromon.removeColumn(tblPotromon.getColumnModel().getColumn(0));
+    }//GEN-LAST:event_formWindowOpened
+
+    
+        private void cargarTable(){
+        List<Potromon> potromones = Potromon.getAll();
+        DefaultTableModel modeloTabla = (DefaultTableModel)tblPotromon.getModel();
+        modeloTabla.setRowCount(0);
+        for(Potromon r : potromones) {
+            modeloTabla.addRow(new Object[] {
+                    r.getId(),
+                    r.getNombre(),
+                    r.getDescripcion(),
+                    r.getLista_habiliades(), 
+                    r.getEntrenador_id(),
+                    r.getPuntaje()
+            });
+            }
+        }
+    
+    
+    
     /**
      * @param args the command line arguments
      */

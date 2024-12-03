@@ -4,11 +4,32 @@
  */
 package mx.itson.potromonpro.entidades;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import mx.itson.potromonpro.persistencia.Conexion;
+
 /**
  *
  * @author dzlan
  */
 public class Potromon {
+
+    /**
+     * @return the entrenador_id
+     */
+    public int getEntrenador_id() {
+        return entrenador_id;
+    }
+
+    /**
+     * @param entrenador_id the entrenador_id to set
+     */
+    public void setEntrenador_id(int entrenador_id) {
+        this.entrenador_id = entrenador_id;
+    }
 
     
     //Falta imagen y entrenador id, no sé qpd todavía 
@@ -16,6 +37,7 @@ public class Potromon {
     private String nombre;
     private String descripcion;
     private String lista_habiliades; 
+    private int entrenador_id;
     private int puntaje; 
     
     
@@ -90,7 +112,28 @@ public class Potromon {
     }
     
     
-    
+        public static List<Potromon> getAll(){
+        List<Potromon> potromones = new ArrayList<>();
+        
+        try{
+            
+            Connection conexion = Conexion.obtener();
+            Statement statement = conexion.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT id, nombre, descripcion, lista_habilidades, entrenador_id, puntaje FROM potromon");
+            while(rs.next()){
+                Potromon r = new Potromon();
+                r.setId(rs.getInt(1));
+                r.setNombre(rs.getString(2));
+                r.setDescripcion(rs.getString(3));
+                r.setLista_habiliades(rs.getString(4));
+                r.setEntrenador_id(rs.getInt(5));
+                r.setPuntaje(rs.getInt(6)); 
+                potromones.add(r);
+            }
+        } catch (Exception ex) {
+                System.err.println("Ocurrió un error: " + ex.getMessage());  
+                    }
+    return potromones;  
 
-    
+}
 }
