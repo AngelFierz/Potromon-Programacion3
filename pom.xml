@@ -4,11 +4,23 @@
     <groupId>mx.itson.mimi</groupId>
     <artifactId>PotromonPro</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <exec.mainClass>mx.itson.mimi.potromonpro.PotromonPro</exec.mainClass>
-    </properties>
+        <exec.mainClass>mx.itson.mimi.crud.CRUD</exec.mainClass>
+         </properties>
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+    <dependency>
+        <groupId>com.sun.mail</groupId>
+        <artifactId>javax.mail</artifactId>
+        <version>1.6.2</version>
+    </dependency>
+    </dependencies>
 </project>
