@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -5,6 +6,7 @@
 package mx.itson.potromonpro.entidades;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -63,14 +65,14 @@ public class Potromon {
      * @return the listahabilidades
      */
     public String getListahabilidades() {
-        return listahabilidades;
+        return listaHabilidades;
     }
 
     /**
      * @param listahabilidades the listahabilidades to set
      */
-    public void setListahabilidades(String listahabilidades) {
-        this.listahabilidades = listahabilidades;
+    public void setListaHabilidades(String listahabilidades) {
+        this.listaHabilidades = listahabilidades;
     }
 
     /**
@@ -104,25 +106,25 @@ public class Potromon {
     /**
      * @return the image
      */
-    public String getImage() {
-        return image;
+    public String getImagen() {
+        return imagen;
     }
 
     /**
      * @param image the image to set
      */
-    public void setImage(String image) {
-        this.image = image;
+    public void setImagen(String image) {
+        this.imagen = image;
     }
 
     
-    private int id;
+       private int id;
     private String nombre;
     private String descripcion;
-    private String listahabilidades; 
+    private String listaHabilidades; 
     private Entrenador entrenador;
     private int puntaje;
-    private String image;
+    private String imagen;
     
     
     public static List<Potromon> getAll(){
@@ -138,8 +140,8 @@ public class Potromon {
                 p.setId(rs.getInt(1));
                 p.setNombre(rs.getString(2));
                 p.setDescripcion(rs.getString(3));                                            
-                p.setListahabilidades(rs.getString(4));
-                p.setImage(rs.getString(5));
+                p.setListaHabilidades(rs.getString(4));
+                p.setImagen(rs.getString(5));
                 
                 Entrenador e = Entrenador.getById(rs.getInt(6));
                 p.setEntrenador(e);            
@@ -152,4 +154,102 @@ public class Potromon {
                     }
     return potromones;
 }
+    
+    public static boolean save(String nombre, String descripcion, String listaHabilidades, String imagen, int entrenador, int puntaje){
+        boolean resultado = false;
+        try{
+            Connection conexion = Conexion.obtener();
+            String consulta = "INSERT INTO potromon (nombre, descripcion, lista_habilidades, imagen, entrenador_id, puntaje) VALUES(?, ?, ?, ?, ?, ?)";
+            PreparedStatement statement = conexion.prepareStatement(consulta);
+            statement.setString(1, nombre);
+            statement.setString(2, descripcion);
+            statement.setString(3, listaHabilidades);
+            statement.setString(4, imagen);
+            statement.setInt(5, entrenador);
+            statement.setInt(6, puntaje);
+            
+            statement.execute();
+            resultado = statement.getUpdateCount() == 1;
+            conexion.close();
+        }catch(Exception ex){
+            System.err.println("Ocurrio un error: " + ex.getMessage());
+        }
+        return resultado;
+    }
+    
+    /**
+     * Sirve para obtener y añadir el ID de un elemento a la tabla
+     * @param id
+     * @return 
+     */
+    public static Potromon getById(int id){
+        Potromon p = new Potromon();
+        
+        try{
+            
+            Connection conexion = Conexion.obtener();
+            String query = "SELECT id, nombre, descripcion, lista_habilidades, imagen, entrenador_id, puntaje FROM potromon WHERE id = ?";
+            PreparedStatement statement = conexion.prepareStatement(query);
+            statement.setInt(1,id);
+            
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+                p.setId(rs.getInt(1));
+                p.setNombre(rs.getString(2));
+                p.setDescripcion(rs.getString(3));                                            
+                p.setListaHabilidades(rs.getString(4));
+                p.setImagen(rs.getString(5));
+                
+                Entrenador e = Entrenador.getById(rs.getInt(6));
+                p.setEntrenador(e);            
+                
+                p.setPuntaje(rs.getInt(7));
+            }
+        } catch (Exception ex) {
+                System.err.println("Ocurrió un error: " + ex.getMessage());  
+                    }
+        return p;
+        
+    }
+    
+        public static boolean edit(String nombre, String descripcion, String listaHabilidades, String imagen, int entrenador, int puntaje){
+        boolean resultado = false;
+        try{
+            Connection conexion = Conexion.obtener();
+            String consulta = "UPDATE potromon SET nombre = ?, descripcion = ?, lista_habilidades = ?, imagen = ?, entrenador_id = ?, puntaje = ? WHERE id = ?";
+            PreparedStatement statement = conexion.prepareStatement(consulta);
+            statement.setString(1, nombre);
+            statement.setString(2, descripcion);
+            statement.setString(3, listaHabilidades);
+            statement.setString(4, imagen);
+            statement.setInt(5, entrenador);
+            statement.setInt(6, puntaje);
+            
+            statement.execute();
+            resultado = statement.getUpdateCount() == 1;
+            conexion.close();
+            
+        }catch(Exception ex){
+            System.err.println("Ocurrio un error: " + ex.getMessage());
+        }
+        return resultado;
+    }
+        
+       public static boolean delete(int id){
+        boolean resultado = false;
+        try{
+            Connection conexion = Conexion.obtener();
+            String consulta = "DELETE FROM potromon WHERE id = ?";
+            PreparedStatement statement = conexion.prepareStatement(consulta);
+            statement.setInt(1, id);
+            
+            statement.execute();
+            resultado = statement.getUpdateCount() == 1;
+            conexion.close();
+            
+        }catch(Exception ex){
+            System.err.println("Ocurrio un error: " + ex.getMessage());
+        }
+        return resultado;
+    }
 }
