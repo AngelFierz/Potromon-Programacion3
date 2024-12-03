@@ -28,7 +28,7 @@ public class PotromonListado extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblPotromon = new javax.swing.JTable();
         btnAgregar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
@@ -38,7 +38,7 @@ public class PotromonListado extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Lista de Potromon");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblPotromon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -49,7 +49,7 @@ public class PotromonListado extends javax.swing.JFrame {
                 "ID", "Nombre", "Descripción", "Habilidades", "Entrenador", "Puntaje"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblPotromon);
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -114,44 +114,15 @@ public class PotromonListado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        ResponsableForm form = new ResponsableForm(this, true, 0);
-        form.setVisible(true);
-
-        cargarTable();
+    //lkjjk
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        int renglon = tblResponsables.getSelectedRow();
-        int idResponsable = Integer.parseInt(tblResponsables.getModel().getValueAt(renglon, 0).toString());
-
-        ResponsableForm form = new ResponsableForm(this, true, idResponsable);
-        form.setVisible(true);
-
-        cargarTable();
-
+//kjk
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        int renglon = tblResponsables.getSelectedRow();
-        int idResponsable = Integer.parseInt(tblResponsables.getModel().getValueAt(renglon, 0).toString());
-
-        if(JOptionPane.showConfirmDialog(this,
-            "¿Está seguro que desea eliminar el registro?",
-            "Eliminar registro",
-            JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION){
-        if(Responsable.delete(idResponsable)){
-            JOptionPane.showMessageDialog(this,
-                "El registro se eliminó con éxito",
-                "Registro eliminado",
-                JOptionPane.INFORMATION_MESSAGE);
-            cargarTable();
-        }else {
-            JOptionPane.showMessageDialog(this,
-                "Ocurrió un error al eliminar el resgitro",
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
-        }
-        }
+        //jjj
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
@@ -195,6 +166,6 @@ public class PotromonListado extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblPotromon;
     // End of variables declaration//GEN-END:variables
 }
