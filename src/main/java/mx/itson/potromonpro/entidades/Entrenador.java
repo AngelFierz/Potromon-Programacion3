@@ -4,6 +4,11 @@
  */
 package mx.itson.potromonpro.entidades;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import mx.itson.potromonpro.persistencia.Conexion;
+
 /**
  *
  * @author dzlan
@@ -71,6 +76,34 @@ public class Entrenador {
     private String apodo;
     private String imagen;  
 
+    
+        public static Entrenador getById(int id){
+        Entrenador r = new Entrenador();
+        
+        try{
+            
+            Connection conexion = Conexion.obtener();
+            String query = "SELECT id, nombre, apodo FROM entrenador WHERE id = ?";
+            PreparedStatement statement = conexion.prepareStatement(query);
+            statement.setInt(1,id);
+            
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+                r.setId(rs.getInt(1));
+                r.setNombre(rs.getString(2));
+                r.setApodo(rs.getString(3));
+            }
+        } catch (Exception ex) {
+                System.err.println("Ocurrió un error: " + ex.getMessage());  
+                    }
+        return r;
+        
+    }
+    
+    
+    
+    
+    
     
     }
 
