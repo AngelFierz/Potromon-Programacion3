@@ -119,15 +119,13 @@ public class Potromon {
             
             Connection conexion = Conexion.obtener();
             Statement statement = conexion.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT id, nombre, descripcion, lista_habilidades, entrenador_id, puntaje FROM potromon");
+            ResultSet rs = statement.executeQuery("SELECT id, nombre, entrenador_id, puntaje FROM potromon");
             while(rs.next()){
                 Potromon r = new Potromon();
                 r.setId(rs.getInt(1));
                 r.setNombre(rs.getString(2));
-                r.setDescripcion(rs.getString(3));
-                r.setLista_habiliades(rs.getString(4));
-                r.setEntrenador_id(rs.getInt(5));
-                r.setPuntaje(rs.getInt(6)); 
+                r.setEntrenador_id(rs.getInt(3));
+                r.setPuntaje(rs.getInt(4)); 
                 potromones.add(r);
             }
         } catch (Exception ex) {

@@ -49,13 +49,13 @@ public class PotromonListado extends javax.swing.JFrame {
 
         tblPotromon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Descripción", "Habilidades", "Entrenador", "Puntaje"
+                "ID", "Nombre", "Entrenador", "Puntaje"
             }
         ));
         jScrollPane1.setViewportView(tblPotromon);
@@ -147,9 +147,7 @@ public class PotromonListado extends javax.swing.JFrame {
         for(Potromon r : potromones) {
             modeloTabla.addRow(new Object[] {
                     r.getId(),
-                    r.getNombre(),
-                    r.getDescripcion(),
-                    r.getLista_habiliades(), 
+                    r.getNombre(), 
                     r.getEntrenador_id(),
                     r.getPuntaje()
             });
