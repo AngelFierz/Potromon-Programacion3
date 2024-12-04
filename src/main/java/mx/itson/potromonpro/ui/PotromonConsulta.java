@@ -4,12 +4,8 @@
  */
 package mx.itson.potromonpro.ui;
 
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
+
 import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -39,70 +35,78 @@ public class PotromonConsulta extends javax.swing.JDialog {
         
         initComponents();
         
-        this.id = id;
-        if(id != 0) {    
-            Potromon p = Potromon.getById(id);
-            List<Tipo> tipos = Tipo.obtenerTipos(id);
-            lblNombre.setText(p.getNombre());
-            lblEntrenador.setText(p.getEntrenador().getNombre());
-            lblPuntaje.setText(String.valueOf(p.getPuntaje()));
-            txtHabilidades.setText(p.getDescripcion());
-            txtDescripcion.setText(p.getListahabilidades()); 
-            
-            ImageIcon potromonImagen = new ImageIcon(p.getImagen());
-            Image imgPotromon = potromonImagen.getImage();  
-            Image resizedImg = imgPotromon.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
-            potromonImagen = new ImageIcon(resizedImg);
-            lblImagen.setIcon(potromonImagen);  
-            
-            Tipo tipo1 = tipos.get(0); 
-            ImageIcon tipo1Icon = new ImageIcon(tipo1.getImagen());
-            Image imgTipo1 = tipo1Icon.getImage();
-            
-            if (tipos.size() > 0) {
-            int nuevoAncho1 = lblTipo1.getWidth() / 2; 
-            int nuevoAlto1 = lblTipo1.getHeight() / 2;
-            Image resizedImgTipo1 = imgTipo1.getScaledInstance(nuevoAncho1, nuevoAlto1, Image.SCALE_SMOOTH);
-            tipo1Icon = new ImageIcon(resizedImgTipo1);
-            lblTipo1.setIcon(tipo1Icon);}
+   this.id = id;
+   if (id != 0) {    
+    Potromon p = Potromon.getById(id);
+    List<Tipo> tipos = Tipo.obtenerTipos(id);
 
-            if (tipos.size() > 1) { 
-            Tipo tipo2 = tipos.get(1); 
-            ImageIcon tipo2Icon = new ImageIcon(tipo2.getImagen());
-            Image imgTipo2 = tipo2Icon.getImage();
+    lblNombre.setText(p.getNombre());
+    lblEntrenador.setText(p.getEntrenador().getNombre());
+    lblPuntaje.setText(String.valueOf(p.getPuntaje()));
+    txtHabilidades.setText(p.getDescripcion());
+    txtDescripcion.setText(p.getListahabilidades()); 
 
-            int nuevoAncho2 = lblTipo2.getWidth() / 2; 
-            int nuevoAlto2 = lblTipo2.getHeight() / 2;
-            Image resizedImgTipo2 = imgTipo2.getScaledInstance(nuevoAncho2, nuevoAlto2, Image.SCALE_SMOOTH);
-            tipo2Icon = new ImageIcon(resizedImgTipo2);
-            lblTipo2.setIcon(tipo2Icon);}
-            
-            txtHabilidades.setLineWrap(true);  
-            txtHabilidades.setWrapStyleWord(true);  
-            txtHabilidades.setEditable(false);  
-            txtHabilidades.setPreferredSize(new java.awt.Dimension(250, 100));  
+    // Mostrar la imagen del Potromón en consulta tanto al momento de agregar uno como consultar los principales, wujuu
+    ImageIcon potromonImagen = new ImageIcon(p.getImagen());
+    Image imgPotromon = potromonImagen.getImage();  
+    Image resizedImg = imgPotromon.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
+    potromonImagen = new ImageIcon(resizedImg);
+    lblImagen.setIcon(potromonImagen);  
 
-            txtDescripcion.setLineWrap(true);  
-            txtDescripcion.setWrapStyleWord(true);  
-            txtDescripcion.setEditable(false);  
-            txtDescripcion.setPreferredSize(new java.awt.Dimension(250, 100));
+    if (tipos.size() > 0) { 
+        Tipo tipo1 = tipos.get(0); 
+        ImageIcon tipo1Icon = new ImageIcon(tipo1.getImagen());
+        Image imgTipo1 = tipo1Icon.getImage();
+        int nuevoAncho1 = lblTipo1.getWidth() / 2; 
+        int nuevoAlto1 = lblTipo1.getHeight() / 2;
+        Image resizedImgTipo1 = imgTipo1.getScaledInstance(nuevoAncho1, nuevoAlto1, Image.SCALE_SMOOTH);
+        tipo1Icon = new ImageIcon(resizedImgTipo1);
+        lblTipo1.setIcon(tipo1Icon);
+    } else {
+        lblTipo1.setText("Sin tipo 1");
+    }
+
+   
+    if (tipos.size() > 1) { 
+        Tipo tipo2 = tipos.get(1); 
+        ImageIcon tipo2Icon = new ImageIcon(tipo2.getImagen());
+        Image imgTipo2 = tipo2Icon.getImage();
+        int nuevoAncho2 = lblTipo2.getWidth() / 2; 
+        int nuevoAlto2 = lblTipo2.getHeight() / 2;
+        Image resizedImgTipo2 = imgTipo2.getScaledInstance(nuevoAncho2, nuevoAlto2, Image.SCALE_SMOOTH);
+        tipo2Icon = new ImageIcon(resizedImgTipo2);
+        lblTipo2.setIcon(tipo2Icon);
+    } else {
+        lblTipo2.setText("Sin tipo 2");
+    }
+
+   
+    txtHabilidades.setLineWrap(true);  
+    txtHabilidades.setWrapStyleWord(true);  
+    txtHabilidades.setEditable(false);  
+    txtHabilidades.setPreferredSize(new java.awt.Dimension(250, 100));  
+
+    txtDescripcion.setLineWrap(true);  
+    txtDescripcion.setWrapStyleWord(true);  
+    txtDescripcion.setEditable(false);  
+    txtDescripcion.setPreferredSize(new java.awt.Dimension(250, 100));
        
-            JLabel[] labelsNombre = {lblNombre, lbl1};
-            Fuente.aplicarFuente(labelsNombre, 13f);  
+    JLabel[] labelsNombre = {lblNombre, lbl1};
+    Fuente.aplicarFuente(labelsNombre, 13f);  
     
-            JLabel[] labelsEntPts = {lblEntrenador, lblPuntaje};
-            Fuente.aplicarFuente(labelsEntPts, 10f);  
+    JLabel[] labelsEntPts = {lblEntrenador, lblPuntaje};
+    Fuente.aplicarFuente(labelsEntPts, 10f);  
 
-            JComponent[] textoHabilidades = {txtHabilidades, txtDescripcion};
-            Fuente.aplicarFuente(textoHabilidades, 8f); 
+    JComponent[] textoHabilidades = {txtHabilidades, txtDescripcion};
+    Fuente.aplicarFuente(textoHabilidades, 8f); 
 
-            JComponent[] textoDescripcion = {txtDescripcion};
-            Fuente.aplicarFuente(textoDescripcion, 9f);
+    JComponent[] textoDescripcion = {txtDescripcion};
+    Fuente.aplicarFuente(textoDescripcion, 9f);
 
-            JLabel[] labels2 = {lbl2, lbl3};
-            Fuente.aplicarFuente(labels2, 10f);
-       }
-        
+    JLabel[] labels2 = {lbl2, lbl3};
+    Fuente.aplicarFuente(labels2, 10f);
+}
+
        
     
        

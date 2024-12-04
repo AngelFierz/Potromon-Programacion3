@@ -17,7 +17,7 @@ public class Conexion {
        public static Connection obtener(){
         Connection conexion = null;
         try{
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3308/potromon?user=root&password=guzman&useUnicode=true&characterEncoding=utf8");
+            conexion = DriverManager.getConnection("jdbc:mysql:/potromon?user=root&password=admin&useUnicode=true&characterEncoding=utf8");
         } catch (Exception ex){
             System.err.println("Ocurrió un error" + ex.getMessage()); 
         }
