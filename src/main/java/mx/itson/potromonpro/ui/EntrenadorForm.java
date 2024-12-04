@@ -177,27 +177,27 @@ int id;
     }//GEN-LAST:event_txtApodoActionPerformed
 
     private void btnImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagenActionPerformed
-        // Crear un JFileChooser para seleccionar el archivo de imagen
+      
     JFileChooser fileChooser = new JFileChooser();
     fileChooser.setDialogTitle("Seleccionar Imagen");
 
-    // Filtrar solo archivos de imagen
+  
     FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de imagen", "png", "jpg", "jpeg", "gif");
     fileChooser.setFileFilter(filter);
 
-    // Mostrar el JFileChooser y verificar si se seleccionó un archivo
+   
     int result = fileChooser.showOpenDialog(this);
     if (result == JFileChooser.APPROVE_OPTION) {
-        // Obtener el archivo seleccionado
+       
         File file = fileChooser.getSelectedFile();
 
-        // Obtener el nombre de la imagen
+       
         String nombreImagen = file.getName();
 
-        // Generar la ruta relativa que se almacenará en la base de datos
+     
         rutaRelativa = "src/main/resources/Profes/" + nombreImagen;
 
-        // Mostrar la imagen seleccionada en la interfaz (Vista previa)
+       
         ImageIcon icon = new ImageIcon(file.getAbsolutePath());
         
 
