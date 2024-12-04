@@ -4,19 +4,34 @@
  */
 package mx.itson.potromonpro.ui;
 
+import mx.itson.potromonpro.entidades.Entrenador;
+
 /**
  *
  * @author dzlan
  */
-public class EntrenadorConsulta extends javax.swing.JFrame {
+public class EntrenadorConsulta extends javax.swing.JDialog {
 
+int id;
     /**
      * Creates new form EntrenadorConsulta
      */
-    public EntrenadorConsulta() {
+    public EntrenadorConsulta(java.awt.Frame parent, boolean modal, int id) {
+        super(parent, modal);
         initComponents();
+
+        this.id = id;
+        if(id != 0) {
+            Entrenador r = Entrenador.getById(id);
+            txtNombre.setText(r.getNombre());
+            txtApodo.setText(r.getApodo());
+        }
     }
 
+    /**
+     * Creates new form EntrenadoresForm
+     */
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,17 +41,34 @@ public class EntrenadorConsulta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtNombre = new javax.swing.JLabel();
+        txtApodo = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        txtNombre.setText("jLabel1");
+
+        txtApodo.setText("jLabel2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(127, 127, 127)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtApodo)
+                    .addComponent(txtNombre))
+                .addContainerGap(236, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(txtNombre)
+                .addGap(33, 33, 33)
+                .addComponent(txtApodo)
+                .addContainerGap(201, Short.MAX_VALUE))
         );
 
         pack();
@@ -72,11 +104,21 @@ public class EntrenadorConsulta extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EntrenadorConsulta().setVisible(true);
+                EntrenadorConsulta dialog = new EntrenadorConsulta(new javax.swing.JFrame(), true,0);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel txtApodo;
+    private javax.swing.JLabel txtNombre;
     // End of variables declaration//GEN-END:variables
 }
