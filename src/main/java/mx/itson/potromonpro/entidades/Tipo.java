@@ -114,6 +114,13 @@ public class Tipo {
         return tipo;
     }
     
+    /**
+     * Agrega una relacion potromon-tipo.
+     * @param potromonId
+     * @param tipoId
+     * @return Retorna un valor booleano.
+     */
+    
      public boolean agregarTipo(int potromonId, int tipoId) {
     String query = "INSERT INTO potromon_tipos (potromon_id, tipo_id) VALUES (?, ?)";
     try (Connection conn = Conexion.obtener(); 
@@ -126,6 +133,12 @@ public class Tipo {
         return false;
     }
 }
+     /**
+      * Elimina un potromon tipo registro en base al ID del potromon y del tipo.
+      * @param potromonId
+      * @param tipoId
+      * @return retorna un valor booleano.
+      */
    
    public boolean eliminarTipo(int potromonId, int tipoId) {
     String query = "DELETE FROM potromon_tipos WHERE potromon_id = ? AND tipo_id = ?";
@@ -140,31 +153,12 @@ public class Tipo {
     }
 }
 
-   
-   /*public static Tipo obtenerTipos(int id) {
-        Tipo tipo = null;
-        try {
-            Connection conexion = Conexion.obtener();
-            String query = "SELECT t.id, t.nombre, t.imagen FROM tipos t " +
-                   "INNER JOIN potromon_tipos pt ON t.id = pt.tipo_id " +
-                   "WHERE pt.potromon_id = ?";
-            PreparedStatement statement = conexion.prepareStatement(query);
-            statement.setInt(1, id);
-            ResultSet rs = statement.executeQuery();
-
-            if (rs.next()) {
-                tipo = new Tipo();
-                tipo.setId(rs.getInt("id"));
-                tipo.setNombre(rs.getString("nombre"));
-                tipo.setImagen(rs.getString("imagen"));
-            }
-
-            conexion.close();
-        } catch (Exception ex) {
-            System.err.println("Error al buscar el tipo por ID: " + ex.getMessage());
-        }
-        return tipo;
-    } */
+   /**
+    * Obtiene un tipo por su ID
+    * @param id
+    * @return Retorna una lista que se conforma de los elementos en la tabla tipo.
+    */
+ 
    
    public static List<Tipo> obtenerTipos(int id) {
     List<Tipo> tipos = new ArrayList<>();
