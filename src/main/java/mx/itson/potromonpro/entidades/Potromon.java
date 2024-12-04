@@ -156,28 +156,27 @@ public class Potromon {
     return potromones;
 }
     
-    public static boolean save(String nombre, String descripcion, String listaHabilidades, String imagen, int entrenador, int puntaje){
-        boolean resultado = false;
-        try{
-            Connection conexion = Conexion.obtener();
-            String consulta = "INSERT INTO potromon (nombre, descripcion, lista_habilidades, imagen, entrenador_id, puntaje) VALUES(?, ?, ?, ?, ?, ?)";
-            PreparedStatement statement = conexion.prepareStatement(consulta);
-            statement.setString(1, nombre);
-            statement.setString(2, descripcion);
-            statement.setString(3, listaHabilidades);
-            statement.setString(4, imagen);
-            statement.setInt(5, entrenador);
-            statement.setInt(6, puntaje);
-            
-            statement.execute();
-            resultado = statement.getUpdateCount() == 1;
-            conexion.close();
-        }catch(Exception ex){
-            System.err.println("Ocurrio un error: " + ex.getMessage());
-        }
-        return resultado;
+    public static boolean save(String nombre, String descripcion, String listaHabilidades, String rutaImagen, int entrenador, int puntaje) {
+    boolean resultado = false;
+    try {
+        Connection conexion = Conexion.obtener();
+        String consulta = "INSERT INTO potromon (nombre, descripcion, lista_habilidades, imagen, entrenador_id, puntaje) VALUES(?, ?, ?, ?, ?, ?)";
+        PreparedStatement statement = conexion.prepareStatement(consulta);
+        statement.setString(1, nombre);
+        statement.setString(2, descripcion);
+        statement.setString(3, listaHabilidades);
+        statement.setString(4, rutaImagen);
+        statement.setInt(5, entrenador);
+        statement.setInt(6, puntaje);
+        statement.execute();
+        resultado = statement.getUpdateCount() == 1;
+        conexion.close();
+    } catch (Exception ex) {
+        System.err.println("Ocurrió un error: " + ex.getMessage());
     }
-    
+    return resultado;
+}
+
     
     
     /**
@@ -185,7 +184,7 @@ public class Potromon {
      * @param id
      * @return 
      */
-    public static Potromon getById(int id) {
+   public static Potromon getById(int id) {
     Potromon p = null;
     try {
         Connection conexion = Conexion.obtener();
@@ -200,20 +199,18 @@ public class Potromon {
             p.setNombre(rs.getString(2));
             p.setDescripcion(rs.getString(3));
             p.setListaHabilidades(rs.getString(4));
-            p.setImagen(rs.getString(5));
-
+            p.setImagen(rs.getString(5)); // Ruta de la imagen
             Entrenador e = Entrenador.getById(rs.getInt(6));
             p.setEntrenador(e);
-
-            p.setPuntaje(rs.getInt(7)); // Obtener el puntaje desde la tonta base de datos
+            p.setPuntaje(rs.getInt(7));
         }
         conexion.close();
     } catch (Exception ex) {
         System.err.println("Ocurrió un error: " + ex.getMessage());
     }
-    
     return p;
 }
+
     public static boolean actualizarPuntaje(int potromonId, int nuevoPuntaje) {
     boolean resultado = false;
     try {
