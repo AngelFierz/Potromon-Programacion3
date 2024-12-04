@@ -141,7 +141,7 @@ public class Tipo {
 }
 
    
-   public static Tipo obtenerTipos(int id) {
+   /*public static Tipo obtenerTipos(int id) {
         Tipo tipo = null;
         try {
             Connection conexion = Conexion.obtener();
@@ -164,7 +164,34 @@ public class Tipo {
             System.err.println("Error al buscar el tipo por ID: " + ex.getMessage());
         }
         return tipo;
+    } */
+   
+   public static List<Tipo> obtenerTipos(int id) {
+    List<Tipo> tipos = new ArrayList<>();
+    try {
+        Connection conexion = Conexion.obtener();
+        String query = "SELECT t.id, t.nombre, t.imagen FROM tipos t " +
+                       "INNER JOIN potromon_tipos pt ON t.id = pt.tipo_id " +
+                       "WHERE pt.potromon_id = ?";
+        PreparedStatement statement = conexion.prepareStatement(query);
+        statement.setInt(1, id);
+        ResultSet rs = statement.executeQuery();
+
+        while (rs.next()) {
+            Tipo tipo = new Tipo();
+            tipo.setId(rs.getInt("id"));
+            tipo.setNombre(rs.getString("nombre"));
+            tipo.setImagen(rs.getString("imagen"));
+            tipos.add(tipo);
+        }
+
+        conexion.close();
+    } catch (Exception ex) {
+        System.err.println("Error al buscar los tipos por ID: " + ex.getMessage());
     }
+    return tipos;
+}
+
 }
 
    

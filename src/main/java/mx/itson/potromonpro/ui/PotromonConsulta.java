@@ -42,7 +42,7 @@ public class PotromonConsulta extends javax.swing.JDialog {
         this.id = id;
         if(id != 0) {    
             Potromon p = Potromon.getById(id);
-            Tipo t = Tipo.obtenerTipos(id);
+            List<Tipo> tipos = Tipo.obtenerTipos(id);
             lblNombre.setText(p.getNombre());
             lblEntrenador.setText(p.getEntrenador().getNombre());
             lblPuntaje.setText(String.valueOf(p.getPuntaje()));
@@ -53,15 +53,28 @@ public class PotromonConsulta extends javax.swing.JDialog {
             Image imgPotromon = potromonImagen.getImage();  
             Image resizedImg = imgPotromon.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
             potromonImagen = new ImageIcon(resizedImg);
-            lblImagen.setIcon(potromonImagen);
+            lblImagen.setIcon(potromonImagen);  
             
-            ImageIcon tipo1 = new ImageIcon(t.getImagen());
-            Image imgTipo1 = tipo1.getImage();  
-            Image resizedImgTipo1 = imgTipo1.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
-            tipo1 = new ImageIcon(resizedImgTipo1);
-            lblTipo1.setIcon(tipo1);
-            
-            
+            Tipo tipo1 = tipos.get(0); // El segundo tipo (índice 1)
+            ImageIcon tipo1Icon = new ImageIcon(tipo1.getImagen());
+            Image imgTipo1 = tipo1Icon.getImage();
+
+            int nuevoAncho1 = lblTipo1.getWidth() / 2; // Ajusta el tamaño
+            int nuevoAlto1 = lblTipo1.getHeight() / 2;
+            Image resizedImgTipo1 = imgTipo1.getScaledInstance(nuevoAncho1, nuevoAlto1, Image.SCALE_SMOOTH);
+            tipo1Icon = new ImageIcon(resizedImgTipo1);
+            lblTipo1.setIcon(tipo1Icon);
+
+            if (tipos.size() > 1) { // Verifica que al menos haya dos tipos
+            Tipo tipo2 = tipos.get(1); // El segundo tipo (índice 1)
+            ImageIcon tipo2Icon = new ImageIcon(tipo2.getImagen());
+            Image imgTipo2 = tipo2Icon.getImage();
+
+            int nuevoAncho2 = lblTipo2.getWidth() / 2; // Ajusta el tamaño
+            int nuevoAlto2 = lblTipo2.getHeight() / 2;
+            Image resizedImgTipo2 = imgTipo2.getScaledInstance(nuevoAncho2, nuevoAlto2, Image.SCALE_SMOOTH);
+            tipo2Icon = new ImageIcon(resizedImgTipo2);
+            lblTipo2.setIcon(tipo2Icon);}
             
             txtHabilidades.setLineWrap(true);  // Activa el ajuste de línea
             txtHabilidades.setWrapStyleWord(true);  // Ajusta las palabras completas, no las separa
@@ -140,8 +153,6 @@ public class PotromonConsulta extends javax.swing.JDialog {
         lbl2.setText("Entrenador:");
 
         lbl3.setText("Puntaje:");
-
-        lblTipo1.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
