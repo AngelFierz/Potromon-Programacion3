@@ -19,7 +19,7 @@ import mx.itson.potromonpro.entidades.Potromon;
  * @author dzlan
  */
 public class PotromonForm extends javax.swing.JDialog {
-private File archivoImagen; // Archivo seleccionado por el usuario
+private File archivoImagen; 
     private String rutaRelativa;
     int id;
     /**
@@ -46,15 +46,15 @@ private File archivoImagen; // Archivo seleccionado por el usuario
         
     }
     private void cargarEntrenadores() {
-    // Obtener la lista de entrenadores desde la base de datos
+    
     List<Entrenador> entrenadores = Entrenador.getAll();
     
-    // Limpiar el JComboBox para evitar duplicados
+   
     cmbEntrenador.removeAllItems();
     
-    // Agregar cada entrenador al JComboBox
+    
     for (Entrenador entrenador : entrenadores) {
-        cmbEntrenador.addItem(entrenador);  // Aquí agrega el objeto Entrenador
+        cmbEntrenador.addItem(entrenador);  
     }
 }
 
@@ -237,24 +237,24 @@ private File archivoImagen; // Archivo seleccionado por el usuario
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
                                      
-    // Obtener los valores de los campos de texto y la imagen
-    String nombre = txtNombre.getText(); // Nombre del Potromón
-    String descripcion = txtDescripcion.getText(); // Descripción
-    String listaHabilidades = txtHabilidades.getText(); // Habilidades del Potromón
-    String imagen = rutaRelativa; // Ruta de la imagen seleccionada
-    Entrenador entrenadorSeleccionado = (Entrenador) cmbEntrenador.getSelectedItem(); // Entrenador seleccionado
-    int entrenador = entrenadorSeleccionado.getId(); // ID del Entrenador
-    int puntaje = Integer.parseInt(txtPuntaje.getText()); // Puntaje ingresado
+    
+    String nombre = txtNombre.getText(); 
+    String descripcion = txtDescripcion.getText(); 
+    String listaHabilidades = txtHabilidades.getText(); 
+    String imagen = rutaRelativa; 
+    Entrenador entrenadorSeleccionado = (Entrenador) cmbEntrenador.getSelectedItem(); 
+    int entrenador = entrenadorSeleccionado.getId(); 
+    int puntaje = Integer.parseInt(txtPuntaje.getText()); 
 
-    // Verificar si es un nuevo registro o una edición
+  
     boolean resultado = this.id == 0 ?
          Potromon.save(nombre, descripcion, listaHabilidades, imagen, entrenador, puntaje):
          Potromon.edit(nombre, descripcion, listaHabilidades, imagen, entrenador, puntaje, id);
 
-    // Mostrar mensajes de confirmación o error
+   
     if (resultado) {
         JOptionPane.showMessageDialog(this, "El registro se guardó correctamente", "Registro guardado", JOptionPane.INFORMATION_MESSAGE);
-        dispose(); // Cerrar el formulario
+        dispose(); 
     } else {
         JOptionPane.showMessageDialog(this, "Hubo un error al intentar guardar el registro", "Error al guardar", JOptionPane.ERROR_MESSAGE);
     }
@@ -274,27 +274,27 @@ private File archivoImagen; // Archivo seleccionado por el usuario
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnSeleccionarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarImagenActionPerformed
-        // Crear un JFileChooser para seleccionar el archivo de imagen
+        
     JFileChooser fileChooser = new JFileChooser();
     fileChooser.setDialogTitle("Seleccionar Imagen");
 
-    // Filtrar solo archivos de imagen
+    
     FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de imagen", "png", "jpg", "jpeg", "gif");
     fileChooser.setFileFilter(filter);
 
-    // Mostrar el JFileChooser y verificar si se seleccionó un archivo
+   
     int result = fileChooser.showOpenDialog(this);
     if (result == JFileChooser.APPROVE_OPTION) {
-        // Obtener el archivo seleccionado
+        
         File file = fileChooser.getSelectedFile();
 
-        // Obtener el nombre de la imagen
+       
         String nombreImagen = file.getName();
 
-        // Generar la ruta relativa que se almacenará en la base de datos
+        
         rutaRelativa = "src/main/resources/Potromones/" + nombreImagen;
 
-        // Mostrar la imagen seleccionada en la interfaz (Vista previa)
+       
         ImageIcon icon = new ImageIcon(file.getAbsolutePath());
         Image imagenEscalada = icon.getImage().getScaledInstance(lblVistaPrevia.getWidth(), lblVistaPrevia.getHeight(), Image.SCALE_SMOOTH);
         lblVistaPrevia.setIcon(new ImageIcon(imagenEscalada));

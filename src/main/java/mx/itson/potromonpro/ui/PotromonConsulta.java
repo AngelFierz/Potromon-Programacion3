@@ -55,43 +55,43 @@ public class PotromonConsulta extends javax.swing.JDialog {
             potromonImagen = new ImageIcon(resizedImg);
             lblImagen.setIcon(potromonImagen);  
             
-            Tipo tipo1 = tipos.get(0); // El segundo tipo (índice 1)
+            Tipo tipo1 = tipos.get(0); 
             ImageIcon tipo1Icon = new ImageIcon(tipo1.getImagen());
             Image imgTipo1 = tipo1Icon.getImage();
             
             if (tipos.size() > 0) {
-            int nuevoAncho1 = lblTipo1.getWidth() / 2; // Ajusta el tamaño
+            int nuevoAncho1 = lblTipo1.getWidth() / 2; 
             int nuevoAlto1 = lblTipo1.getHeight() / 2;
             Image resizedImgTipo1 = imgTipo1.getScaledInstance(nuevoAncho1, nuevoAlto1, Image.SCALE_SMOOTH);
             tipo1Icon = new ImageIcon(resizedImgTipo1);
             lblTipo1.setIcon(tipo1Icon);}
 
-            if (tipos.size() > 1) { // Verifica que al menos haya dos tipos
-            Tipo tipo2 = tipos.get(1); // El segundo tipo (índice 1)
+            if (tipos.size() > 1) { 
+            Tipo tipo2 = tipos.get(1); 
             ImageIcon tipo2Icon = new ImageIcon(tipo2.getImagen());
             Image imgTipo2 = tipo2Icon.getImage();
 
-            int nuevoAncho2 = lblTipo2.getWidth() / 2; // Ajusta el tamaño
+            int nuevoAncho2 = lblTipo2.getWidth() / 2; 
             int nuevoAlto2 = lblTipo2.getHeight() / 2;
             Image resizedImgTipo2 = imgTipo2.getScaledInstance(nuevoAncho2, nuevoAlto2, Image.SCALE_SMOOTH);
             tipo2Icon = new ImageIcon(resizedImgTipo2);
             lblTipo2.setIcon(tipo2Icon);}
             
-            txtHabilidades.setLineWrap(true);  // Activa el ajuste de línea
-            txtHabilidades.setWrapStyleWord(true);  // Ajusta las palabras completas, no las separa
-            txtHabilidades.setEditable(false);  // Si no deseas que se pueda editar
-            txtHabilidades.setPreferredSize(new java.awt.Dimension(250, 100));  // Ajusta el tamaño del área de texto (250px de ancho, 100px de alto)
+            txtHabilidades.setLineWrap(true);  
+            txtHabilidades.setWrapStyleWord(true);  
+            txtHabilidades.setEditable(false);  
+            txtHabilidades.setPreferredSize(new java.awt.Dimension(250, 100));  
 
-            txtDescripcion.setLineWrap(true);  // Activa el ajuste de línea
-            txtDescripcion.setWrapStyleWord(true);  // Ajusta las palabras completas, no las separa
-            txtDescripcion.setEditable(false);  // Si no deseas que se pueda editar
+            txtDescripcion.setLineWrap(true);  
+            txtDescripcion.setWrapStyleWord(true);  
+            txtDescripcion.setEditable(false);  
             txtDescripcion.setPreferredSize(new java.awt.Dimension(250, 100));
        
             JLabel[] labelsNombre = {lblNombre, lbl1};
-            Fuente.aplicarFuente(labelsNombre, 13f);  // Aplica la fuente a los JLabel con tamaño 18
+            Fuente.aplicarFuente(labelsNombre, 13f);  
     
             JLabel[] labelsEntPts = {lblEntrenador, lblPuntaje};
-            Fuente.aplicarFuente(labelsEntPts, 10f);  // Aplica la fuente a los JLabel con tamaño 18
+            Fuente.aplicarFuente(labelsEntPts, 10f);  
 
             JComponent[] textoHabilidades = {txtHabilidades, txtDescripcion};
             Fuente.aplicarFuente(textoHabilidades, 8f); 
