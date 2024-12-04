@@ -20,7 +20,7 @@ import mx.itson.potromonpro.entidades.Potromon;
  */
 public class PotromonForm extends javax.swing.JDialog {
 private File archivoImagen; // Archivo seleccionado por el usuario
-
+    private String rutaRelativa;
     int id;
     /**
      * Creates new form PotromonForm
@@ -82,6 +82,8 @@ private File archivoImagen; // Archivo seleccionado por el usuario
         btnAceptar = new javax.swing.JButton();
         cmbEntrenador = new javax.swing.JComboBox<>();
         btnSeleccionarImagen = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -132,17 +134,23 @@ private File archivoImagen; // Archivo seleccionado por el usuario
             }
         });
 
+        jLabel7.setText("jLabel7");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAceptar)
-                .addGap(74, 74, 74))
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAceptar)
+                        .addGap(74, 74, 74))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -208,9 +216,17 @@ private File archivoImagen; // Archivo seleccionado por el usuario
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtPuntaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(btnAceptar)
-                .addGap(19, 19, 19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addComponent(btnAceptar)
+                        .addGap(19, 19, 19))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -222,7 +238,7 @@ private File archivoImagen; // Archivo seleccionado por el usuario
     String nombre = txtNombre.getText(); // Nombre del Potromón
     String descripcion = txtDescripcion.getText(); // Descripción
     String listaHabilidades = txtHabilidades.getText(); // Habilidades del Potromón
-    String imagen = archivoImagen != null ? archivoImagen.getAbsolutePath() : ""; // Ruta de la imagen seleccionada
+    String imagen = rutaRelativa; // Ruta de la imagen seleccionada
     Entrenador entrenadorSeleccionado = (Entrenador) cmbEntrenador.getSelectedItem(); // Entrenador seleccionado
     int entrenador = entrenadorSeleccionado.getId(); // ID del Entrenador
     int puntaje = Integer.parseInt(txtPuntaje.getText()); // Puntaje ingresado
@@ -255,21 +271,32 @@ private File archivoImagen; // Archivo seleccionado por el usuario
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnSeleccionarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarImagenActionPerformed
-           JFileChooser fileChooser = new JFileChooser();
-    fileChooser.setFileFilter(new FileNameExtensionFilter("Imágenes", "jpg", "png", "jpeg"));
-    int opcion = fileChooser.showOpenDialog(this);
-    if (opcion == JFileChooser.APPROVE_OPTION) {
-        archivoImagen = fileChooser.getSelectedFile(); // Guardar el archivo seleccionado
-        mostrarVistaPrevia(); // Mostrar la imagen en el JLabel
-    }
-}
+            // Crear un JFileChooser para seleccionar el archivo de imagen
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Seleccionar Imagen");
+    
+    // Filtrar solo archivos de imagen
+    FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de imagen", "png", "jpg", "jpeg", "gif");
+    fileChooser.setFileFilter(filter);
 
-private void mostrarVistaPrevia() {
-    if (archivoImagen != null) {
-        ImageIcon icono = new ImageIcon(archivoImagen.getAbsolutePath());
-        Image imagenEscalada = icono.getImage().getScaledInstance(lblVistaPrevia.getWidth(), lblVistaPrevia.getHeight(), Image.SCALE_SMOOTH);
+    // Mostrar el JFileChooser y verificar si se seleccionó un archivo
+    int result = fileChooser.showOpenDialog(this);
+    if (result == JFileChooser.APPROVE_OPTION) {
+        // Obtener el archivo seleccionado
+        File file = fileChooser.getSelectedFile();
+        
+        // Obtener el nombre de la imagen
+        String nombreImagen = file.getName();
+        
+        // Generar la ruta relativa que se almacenará en la base de datos
+        rutaRelativa = "src/main/resources/Potromones/" + nombreImagen;               
+        
+        // Mostrar la imagen seleccionada en la interfaz (Vista previa)
+        ImageIcon icon = new ImageIcon(file.getAbsolutePath());
+        Image imagenEscalada = icon.getImage().getScaledInstance(lblVistaPrevia.getWidth(), lblVistaPrevia.getHeight(), Image.SCALE_SMOOTH);
         lblVistaPrevia.setIcon(new ImageIcon(imagenEscalada));
-    }
+    } 
+
 
 
     }//GEN-LAST:event_btnSeleccionarImagenActionPerformed
@@ -321,12 +348,14 @@ private void mostrarVistaPrevia() {
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnSeleccionarImagen;
     private javax.swing.JComboBox<Entrenador> cmbEntrenador;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel lblVistaPrevia;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtHabilidades;
