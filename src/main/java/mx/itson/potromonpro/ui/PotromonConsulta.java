@@ -31,7 +31,7 @@ public class PotromonConsulta extends javax.swing.JDialog {
         
         this.id = id;
         if(id != 0) {    
-            Potromon p = Potromon.getById(5);
+            Potromon p = Potromon.getById(id);
             lblNombre.setText(p.getNombre());
             lblEntrenador.setText(p.getEntrenador().getNombre());
             lblPuntaje.setText(String.valueOf(p.getPuntaje()));
