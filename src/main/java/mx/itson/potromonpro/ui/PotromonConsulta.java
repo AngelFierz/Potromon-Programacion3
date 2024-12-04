@@ -58,12 +58,13 @@ public class PotromonConsulta extends javax.swing.JDialog {
             Tipo tipo1 = tipos.get(0); // El segundo tipo (índice 1)
             ImageIcon tipo1Icon = new ImageIcon(tipo1.getImagen());
             Image imgTipo1 = tipo1Icon.getImage();
-
+            
+            if (tipos.size() > 0) {
             int nuevoAncho1 = lblTipo1.getWidth() / 2; // Ajusta el tamaño
             int nuevoAlto1 = lblTipo1.getHeight() / 2;
             Image resizedImgTipo1 = imgTipo1.getScaledInstance(nuevoAncho1, nuevoAlto1, Image.SCALE_SMOOTH);
             tipo1Icon = new ImageIcon(resizedImgTipo1);
-            lblTipo1.setIcon(tipo1Icon);
+            lblTipo1.setIcon(tipo1Icon);}
 
             if (tipos.size() > 1) { // Verifica que al menos haya dos tipos
             Tipo tipo2 = tipos.get(1); // El segundo tipo (índice 1)

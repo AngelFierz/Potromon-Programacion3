@@ -271,10 +271,10 @@ private File archivoImagen; // Archivo seleccionado por el usuario
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnSeleccionarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarImagenActionPerformed
-            // Crear un JFileChooser para seleccionar el archivo de imagen
+        // Crear un JFileChooser para seleccionar el archivo de imagen
     JFileChooser fileChooser = new JFileChooser();
     fileChooser.setDialogTitle("Seleccionar Imagen");
-    
+
     // Filtrar solo archivos de imagen
     FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de imagen", "png", "jpg", "jpeg", "gif");
     fileChooser.setFileFilter(filter);
@@ -284,21 +284,20 @@ private File archivoImagen; // Archivo seleccionado por el usuario
     if (result == JFileChooser.APPROVE_OPTION) {
         // Obtener el archivo seleccionado
         File file = fileChooser.getSelectedFile();
-        
+
         // Obtener el nombre de la imagen
         String nombreImagen = file.getName();
-        
+
         // Generar la ruta relativa que se almacenará en la base de datos
-        rutaRelativa = "src/main/resources/Potromones/" + nombreImagen;               
-        
+        rutaRelativa = "src/main/resources/Potromones/" + nombreImagen;
+
         // Mostrar la imagen seleccionada en la interfaz (Vista previa)
         ImageIcon icon = new ImageIcon(file.getAbsolutePath());
         Image imagenEscalada = icon.getImage().getScaledInstance(lblVistaPrevia.getWidth(), lblVistaPrevia.getHeight(), Image.SCALE_SMOOTH);
         lblVistaPrevia.setIcon(new ImageIcon(imagenEscalada));
-    } 
 
 
-
+    }
     }//GEN-LAST:event_btnSeleccionarImagenActionPerformed
 
     /**
