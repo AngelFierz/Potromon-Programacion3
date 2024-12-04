@@ -6,7 +6,9 @@ package mx.itson.potromonpro.ui;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import mx.itson.potromonpro.entidades.Entrenador;
+import mx.itson.potromonpro.grafico.Fuente;
 
 /**
  *
@@ -27,6 +29,9 @@ int id;
             Entrenador r = Entrenador.getById(id);
             txtNombre.setText(r.getNombre());
             txtApodo.setText(r.getApodo());
+            
+            JLabel[] labelsNombre = {txtNombre, txtApodo};
+            Fuente.aplicarFuente(labelsNombre, 13f);  // Aplica la fuente a los JLabel con tamaño 18 
             
             ImageIcon entrenadorImagen = new ImageIcon(r.getImagen());
             Image imgEntrenador = entrenadorImagen.getImage();  
@@ -54,12 +59,16 @@ int id;
         lblImagen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(152, 176, 204));
+        setForeground(new java.awt.Color(156, 194, 224));
 
         txtNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtNombre.setText("jLabel1");
 
         txtApodo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtApodo.setText("jLabel2");
+
+        lblImagen.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 255)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,13 +77,13 @@ int id;
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(176, 176, 176)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtApodo)
-                            .addComponent(txtNombre)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(96, 96, 96)
-                        .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(153, 153, 153)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtApodo)
+                            .addComponent(txtNombre))))
                 .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
