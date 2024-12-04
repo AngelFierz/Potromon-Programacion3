@@ -44,7 +44,7 @@ public class TipoTest {
     public void testGetId() {
         System.out.println("getId");
         Tipo instance = new Tipo();
-         instance.setId(4);
+        instance.setId(4);
         int expResult = 4;
         int result = instance.getId();
         assertEquals(expResult, result);
@@ -143,8 +143,8 @@ public class TipoTest {
     @Test
     public void testAgregarTipo() {
         System.out.println("agregarTipo");
-        int potromonId = 22;
-        int tipoId = 20;
+        int potromonId = 10;
+        int tipoId = 10;
         Tipo instance = new Tipo();
         boolean expResult = true;
         boolean result = instance.agregarTipo(potromonId, tipoId);

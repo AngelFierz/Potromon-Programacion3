@@ -268,7 +268,7 @@ public class PotromonTest {
     @Test
     public void testActualizarPuntaje() {
         System.out.println("actualizarPuntaje");
-        int potromonId = 16;
+        int potromonId = 9;
         int nuevoPuntaje = 67;
         boolean expResult = true;
         boolean result = Potromon.actualizarPuntaje(potromonId, nuevoPuntaje);
@@ -288,7 +288,7 @@ public class PotromonTest {
         String imagen = "pro.png";
         int entrenador = 1;
         int puntaje = 90;
-        int potromonId = 12;
+        int potromonId = 9;
         boolean expResult = true;
         boolean result = Potromon.edit(nombre, descripcion, listaHabilidades, imagen, entrenador, puntaje, potromonId);
         assertEquals(expResult, result);
@@ -301,7 +301,7 @@ public class PotromonTest {
     @Test
     public void testDelete() {
         System.out.println("delete");
-        int id = 31;
+        int id = 9;
         boolean expResult = true;
         boolean result = Potromon.delete(id);
         assertEquals(expResult, result);

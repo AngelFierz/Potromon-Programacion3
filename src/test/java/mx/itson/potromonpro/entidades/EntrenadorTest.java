@@ -178,7 +178,7 @@ public class EntrenadorTest {
         String nombre = "Pablito";
         String apodo = "Lito";
         String imagen = "Pablito.png";
-        int id = 11;
+        int id = 9;
         boolean expResult = true;
         boolean result = Entrenador.edit(nombre, apodo, imagen, id);
         assertEquals(expResult, result);
@@ -190,7 +190,7 @@ public class EntrenadorTest {
     @Test
     public void testDelete() {
         System.out.println("delete");
-        int id = 24;
+        int id = 9;
         boolean expResult = true;
         boolean result = Entrenador.delete(id);
         assertEquals(expResult, result);
