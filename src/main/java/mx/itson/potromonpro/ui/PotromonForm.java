@@ -86,7 +86,7 @@ private File archivoImagen; // Archivo seleccionado por el usuario
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Agregar Potromon");
+        jLabel2.setText("Agregar o editar Potromon");
 
         jLabel3.setText("Nombre");
 
@@ -151,28 +151,23 @@ private File archivoImagen; // Archivo seleccionado por el usuario
                         .addGap(231, 231, 231))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombre)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtDescripcion, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtHabilidades, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPuntaje, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(43, 43, 43))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(0, 446, Short.MAX_VALUE))
-                                    .addComponent(txtNombre))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel1))
                                     .addComponent(VF)
                                     .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtDescripcion, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtHabilidades, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtPuntaje, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(43, 43, 43)))
+                                .addGap(0, 247, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(43, 43, 43)
