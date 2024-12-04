@@ -4,6 +4,7 @@
  */
 package mx.itson.potromonpro.ui;
 
+import java.util.List;
 import javax.swing.JOptionPane;
 import mx.itson.potromonpro.entidades.Entrenador;
 import mx.itson.potromonpro.entidades.Potromon;
@@ -31,8 +32,25 @@ public class PotromonForm extends javax.swing.JDialog {
             txtPuntaje.setText(String.valueOf(p.getPuntaje()));
             
         }
+        
+        cargarEntrenadores();
     }
+    private void cargarEntrenadores() {
+    // Obtener la lista de entrenadores desde la base de datos
+    List<Entrenador> entrenadores = Entrenador.getAll();
+    
+    // Limpiar el JComboBox para evitar duplicados
+    cmbEntrenador.removeAllItems();
+    
+    // Agregar cada entrenador al JComboBox
+    for (Entrenador entrenador : entrenadores) {
+        cmbEntrenador.addItem(entrenador);  // Aquí agrega el objeto Entrenador
+    }
+}
 
+
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,7 +73,6 @@ public class PotromonForm extends javax.swing.JDialog {
         txtPuntaje = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         btnAceptar = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
         cmbEntrenador = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -100,8 +117,6 @@ public class PotromonForm extends javax.swing.JDialog {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,9 +147,7 @@ public class PotromonForm extends javax.swing.JDialog {
                                     .addComponent(VF)
                                     .addComponent(jLabel4))
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(22, 22, 22)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54))
+                        .addGap(148, 148, 148))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtDescripcion, javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,9 +182,7 @@ public class PotromonForm extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtHabilidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -182,7 +193,7 @@ public class PotromonForm extends javax.swing.JDialog {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtPuntaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
                 .addGap(19, 19, 19))
         );
@@ -279,8 +290,7 @@ public class PotromonForm extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel VF;
     private javax.swing.JButton btnAceptar;
-    private javax.swing.JComboBox<String> cmbEntrenador;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Entrenador> cmbEntrenador;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -185,7 +185,10 @@ public class Entrenador {
         return resultado;
     }         
          
-         
+    @Override
+    public String toString() {
+        return nombre; 
+    }
     
     }
 
