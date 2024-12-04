@@ -37,6 +37,7 @@ public class PotromonListado extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        btnConsulta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -82,6 +83,13 @@ public class PotromonListado extends javax.swing.JFrame {
             }
         });
 
+        btnConsulta.setText("Consulta");
+        btnConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,8 +104,9 @@ public class PotromonListado extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(42, Short.MAX_VALUE))
+                            .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnConsulta))))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,7 +123,9 @@ public class PotromonListado extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnEditar)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEliminar)))
+                        .addComponent(btnEliminar)
+                        .addGap(60, 60, 60)
+                        .addComponent(btnConsulta)))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
 
@@ -158,6 +169,11 @@ public class PotromonListado extends javax.swing.JFrame {
         cargarTable();
         tblPotromon.removeColumn(tblPotromon.getColumnModel().getColumn(0));
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
+       PotromonConsulta form = new PotromonConsulta(this, true, 0);
+        form.setVisible(true);
+    }//GEN-LAST:event_btnConsultaActionPerformed
 
     
         private void cargarTable(){
@@ -213,6 +229,7 @@ public class PotromonListado extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnConsulta;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JLabel jLabel1;
