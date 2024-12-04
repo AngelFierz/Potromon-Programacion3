@@ -39,8 +39,11 @@ private File archivoImagen; // Archivo seleccionado por el usuario
             
         }
         
+       Thread thread = new Thread(() -> {
+           cargarEntrenadores();
+        });
+       thread.start();
         
-        cargarEntrenadores();
     }
     private void cargarEntrenadores() {
     // Obtener la lista de entrenadores desde la base de datos
