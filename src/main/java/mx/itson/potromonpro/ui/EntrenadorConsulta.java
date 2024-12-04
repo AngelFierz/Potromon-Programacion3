@@ -55,8 +55,10 @@ int id;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        txtNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtNombre.setText("jLabel1");
 
+        txtApodo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtApodo.setText("jLabel2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
