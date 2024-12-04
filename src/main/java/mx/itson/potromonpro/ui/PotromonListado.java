@@ -171,8 +171,22 @@ public class PotromonListado extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
-       PotromonConsulta form = new PotromonConsulta(this, true, 0);
-        form.setVisible(true);
+    int renglon = tblPotromon.getSelectedRow();
+    
+    
+    if (renglon == -1) {
+        JOptionPane.showMessageDialog(this, "Por favor selecciona un registro", "Error", JOptionPane.WARNING_MESSAGE);
+        return; 
+    }
+    
+    int potromon_id = Integer.parseInt(tblPotromon.getModel().getValueAt(renglon, 0).toString());
+    
+   
+    PotromonConsulta form = new PotromonConsulta(this, true, potromon_id); 
+    form.setVisible(true);
+    
+
+
     }//GEN-LAST:event_btnConsultaActionPerformed
 
     
