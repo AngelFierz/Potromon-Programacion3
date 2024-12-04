@@ -178,40 +178,60 @@ public class Potromon {
         return resultado;
     }
     
+    
+    
     /**
      * Sirve para obtener y añadir el ID de un elemento a la tabla
      * @param id
      * @return 
      */
-    public static Potromon getById(int id){
-        Potromon p = new Potromon();
-        
-        try{
-            
-            Connection conexion = Conexion.obtener();
-            String query = "SELECT id, nombre, descripcion, lista_habilidades, imagen, entrenador_id, puntaje FROM potromon WHERE id = ?";
-            PreparedStatement statement = conexion.prepareStatement(query);
-            statement.setInt(1,id);
-            
-            ResultSet rs = statement.executeQuery();
-            while(rs.next()){
-                p.setId(rs.getInt(1));
-                p.setNombre(rs.getString(2));
-                p.setDescripcion(rs.getString(3));                                            
-                p.setListaHabilidades(rs.getString(4));
-                p.setImagen(rs.getString(5));
-                
-                Entrenador e = Entrenador.getById(rs.getInt(6));
-                p.setEntrenador(e);            
-                
-                p.setPuntaje(rs.getInt(7));
-            }
-        } catch (Exception ex) {
-                System.err.println("Ocurrió un error: " + ex.getMessage());  
-                    }
-        return p;
-        
+    public static Potromon getById(int id) {
+    Potromon p = null;
+    try {
+        Connection conexion = Conexion.obtener();
+        String query = "SELECT id, nombre, descripcion, lista_habilidades, imagen, entrenador_id, puntaje FROM potromon WHERE id = ?";
+        PreparedStatement statement = conexion.prepareStatement(query);
+        statement.setInt(1, id);
+
+        ResultSet rs = statement.executeQuery();
+        if (rs.next()) {
+            p = new Potromon();
+            p.setId(rs.getInt(1));
+            p.setNombre(rs.getString(2));
+            p.setDescripcion(rs.getString(3));
+            p.setListaHabilidades(rs.getString(4));
+            p.setImagen(rs.getString(5));
+
+            Entrenador e = Entrenador.getById(rs.getInt(6));
+            p.setEntrenador(e);
+
+            p.setPuntaje(rs.getInt(7)); // Obtener el puntaje desde la tonta base de datos
+        }
+        conexion.close();
+    } catch (Exception ex) {
+        System.err.println("Ocurrió un error: " + ex.getMessage());
     }
+    
+    return p;
+}
+    public static boolean actualizarPuntaje(int potromonId, int nuevoPuntaje) {
+    boolean resultado = false;
+    try {
+        Connection conexion = Conexion.obtener();
+        String consulta = "UPDATE potromon SET puntaje = ? WHERE id = ?";
+        PreparedStatement statement = conexion.prepareStatement(consulta);
+        statement.setInt(1, nuevoPuntaje);
+        statement.setInt(2, potromonId); 
+        statement.execute();
+        resultado = statement.getUpdateCount() == 1;
+        conexion.close();
+    } catch (Exception ex) {
+        System.err.println("Ocurrió un error al actualizar el puntaje: " + ex.getMessage());
+    }
+    return resultado;
+}
+
+        
     
         public static boolean edit(String nombre, String descripcion, String listaHabilidades, String imagen, int entrenador, int puntaje){
         boolean resultado = false;

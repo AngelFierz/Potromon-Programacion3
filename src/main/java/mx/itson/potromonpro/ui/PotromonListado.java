@@ -38,6 +38,8 @@ public class PotromonListado extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnConsulta = new javax.swing.JButton();
+        smrPuntaje = new javax.swing.JButton();
+        rstPuntaje = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -90,22 +92,43 @@ public class PotromonListado extends javax.swing.JFrame {
             }
         });
 
+        smrPuntaje.setText("Sumar Puntaje");
+        smrPuntaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smrPuntajeActionPerformed(evt);
+            }
+        });
+
+        rstPuntaje.setText("Restar Puntaje");
+        rstPuntaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rstPuntajeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnConsulta))))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnConsulta)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(smrPuntaje)
+                        .addGap(170, 170, 170)
+                        .addComponent(rstPuntaje)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -126,21 +149,25 @@ public class PotromonListado extends javax.swing.JFrame {
                         .addComponent(btnEliminar)
                         .addGap(60, 60, 60)
                         .addComponent(btnConsulta)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(smrPuntaje)
+                    .addComponent(rstPuntaje))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-       PotromonForm form = new PotromonForm(this, true, 0);
+        PotromonForm form = new PotromonForm(this, true, 0);
         form.setVisible(true);
 
         cargarTable();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-    int renglon = tblPotromon.getSelectedRow();
+        int renglon = tblPotromon.getSelectedRow();
         int idPotromon = Integer.parseInt(tblPotromon.getModel().getValueAt(renglon, 0).toString());
 
         PotromonForm form = new PotromonForm(this, true, idPotromon);
@@ -153,16 +180,16 @@ public class PotromonListado extends javax.swing.JFrame {
         int renglon = tblPotromon.getSelectedRow();
         int idServicio = Integer.parseInt(tblPotromon.getModel().getValueAt(renglon, 0).toString());
 
-        if(JOptionPane.showConfirmDialog(this, "¿Estas seguro que desea eliminar el  Potromon?", "Eliminar registro", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
-}
-            if(Potromon.delete(idServicio)){
-                JOptionPane.showMessageDialog(this, "El Potromon se elimino con exito", "Registro eliminado", JOptionPane.INFORMATION_MESSAGE);
-                cargarTable();
-                
-                if(Potromon.delete(idServicio)){
+        if (JOptionPane.showConfirmDialog(this, "¿Estas seguro que desea eliminar el  Potromon?", "Eliminar registro", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        }
+        if (Potromon.delete(idServicio)) {
+            JOptionPane.showMessageDialog(this, "El Potromon se elimino con exito", "Registro eliminado", JOptionPane.INFORMATION_MESSAGE);
+            cargarTable();
+
+            if (Potromon.delete(idServicio)) {
                 JOptionPane.showMessageDialog(this, "Ocurrio un error al eliminar el Potromon", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            }
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -171,41 +198,71 @@ public class PotromonListado extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
-    int renglon = tblPotromon.getSelectedRow();
-    
-    
-    if (renglon == -1) {
-        JOptionPane.showMessageDialog(this, "Por favor selecciona un registro", "Error", JOptionPane.WARNING_MESSAGE);
-        return; 
-    }
-    
-    int potromon_id = Integer.parseInt(tblPotromon.getModel().getValueAt(renglon, 0).toString());
-    
-   
-    PotromonConsulta form = new PotromonConsulta(this, true, potromon_id); 
-    form.setVisible(true);
-    
+        int renglon = tblPotromon.getSelectedRow();
+
+        if (renglon == -1) {
+            JOptionPane.showMessageDialog(this, "Por favor selecciona un registro", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int potromon_id = Integer.parseInt(tblPotromon.getModel().getValueAt(renglon, 0).toString());
+
+        PotromonConsulta form = new PotromonConsulta(this, true, potromon_id);
+        form.setVisible(true);
 
 
     }//GEN-LAST:event_btnConsultaActionPerformed
 
-    
-        private void cargarTable(){
+    private void smrPuntajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smrPuntajeActionPerformed
+  int selectedRow = tblPotromon.getSelectedRow();
+    if (selectedRow != -1) {
+        int potromonId = Integer.parseInt(tblPotromon.getModel().getValueAt(selectedRow, 0).toString());
+        Potromon p = Potromon.getById(potromonId); 
+
+        int nuevoPuntaje = p.getPuntaje() + 5; 
+        Potromon.actualizarPuntaje(potromonId, nuevoPuntaje); 
+
+        
+        tblPotromon.getModel().setValueAt(nuevoPuntaje, selectedRow, 3); 
+    } else {
+        JOptionPane.showMessageDialog(this, "Selecciona un potromon");
+    }
+
+       
+   
+    }//GEN-LAST:event_smrPuntajeActionPerformed
+
+    private void rstPuntajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rstPuntajeActionPerformed
+   int selectedRow = tblPotromon.getSelectedRow();
+    if (selectedRow != -1) {
+        int potromonId = Integer.parseInt(tblPotromon.getModel().getValueAt(selectedRow, 0).toString());
+        Potromon p = Potromon.getById(potromonId); 
+
+        int nuevoPuntaje = Math.max(0, p.getPuntaje() - 5); 
+        Potromon.actualizarPuntaje(potromonId, nuevoPuntaje);
+
+        
+        tblPotromon.getModel().setValueAt(nuevoPuntaje, selectedRow, 3); 
+    } else {
+        JOptionPane.showMessageDialog(this, "Selecciona un potromon");
+    }
+
+    }//GEN-LAST:event_rstPuntajeActionPerformed
+
+    private void cargarTable() {
         List<Potromon> potromones = Potromon.getAll();
-        DefaultTableModel modeloTabla = (DefaultTableModel)tblPotromon.getModel();
+        DefaultTableModel modeloTabla = (DefaultTableModel) tblPotromon.getModel();
         modeloTabla.setRowCount(0);
-        for(Potromon r : potromones) {
-            modeloTabla.addRow(new Object[] {
-                    r.getId(),
-                    r.getNombre(), 
-                    r.getEntrenador().getNombre(),
-                    r.getPuntaje()
+        for (Potromon r : potromones) {
+            modeloTabla.addRow(new Object[]{
+                r.getId(),
+                r.getNombre(),
+                r.getEntrenador().getNombre(),
+                r.getPuntaje()
             });
-            }
         }
-    
-    
-    
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -248,6 +305,8 @@ public class PotromonListado extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton rstPuntaje;
+    private javax.swing.JButton smrPuntaje;
     private javax.swing.JTable tblPotromon;
     // End of variables declaration//GEN-END:variables
 }
