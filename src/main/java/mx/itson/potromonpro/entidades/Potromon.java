@@ -230,7 +230,7 @@ public class Potromon {
 
         
     
-        public static boolean edit(String nombre, String descripcion, String listaHabilidades, String imagen, int entrenador, int puntaje){
+        public static boolean edit(String nombre, String descripcion, String listaHabilidades, String imagen, int entrenador, int puntaje, int potromonId){
         boolean resultado = false;
         try{
             Connection conexion = Conexion.obtener();
@@ -242,6 +242,7 @@ public class Potromon {
             statement.setString(4, imagen);
             statement.setInt(5, entrenador);
             statement.setInt(6, puntaje);
+            statement.setInt(7, potromonId);
             
             statement.execute();
             resultado = statement.getUpdateCount() == 1;

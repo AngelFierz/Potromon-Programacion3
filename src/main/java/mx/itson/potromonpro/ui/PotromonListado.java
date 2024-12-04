@@ -170,7 +170,7 @@ public class PotromonListado extends javax.swing.JFrame {
         int renglon = tblPotromon.getSelectedRow();
         int idPotromon = Integer.parseInt(tblPotromon.getModel().getValueAt(renglon, 0).toString());
 
-        PotromonForm form = new PotromonForm(this, true, idPotromon);
+        PotromonForm form = new PotromonForm(this, true,  idPotromon);
         form.setVisible(true);
 
         cargarTable();

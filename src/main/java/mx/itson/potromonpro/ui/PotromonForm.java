@@ -233,9 +233,9 @@ private File archivoImagen; // Archivo seleccionado por el usuario
     int puntaje = Integer.parseInt(txtPuntaje.getText()); // Puntaje ingresado
 
     // Verificar si es un nuevo registro o una edición
-    boolean resultado = this.id == 0
-        ? Potromon.save(nombre, descripcion, listaHabilidades, imagen, entrenador, puntaje)
-        : Potromon.edit(nombre, descripcion, listaHabilidades, imagen, entrenador, puntaje);
+    boolean resultado = this.id == 0 ?
+         Potromon.save(nombre, descripcion, listaHabilidades, imagen, entrenador, puntaje):
+         Potromon.edit(nombre, descripcion, listaHabilidades, imagen, entrenador, puntaje, id);
 
     // Mostrar mensajes de confirmación o error
     if (resultado) {
