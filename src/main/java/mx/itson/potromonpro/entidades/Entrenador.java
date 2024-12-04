@@ -13,7 +13,7 @@ import java.util.List;
 import mx.itson.potromonpro.persistencia.Conexion;
 
 /**
- *
+ * Clase de los atributos y métodos de la entidad entrenador
  * @author dzlan
  */
 public class Entrenador {
@@ -79,7 +79,10 @@ public class Entrenador {
     private String apodo;
     private String imagen;  
 
-    
+    /**
+     * Obtiene todos los entrenadores de la base de datos
+     * @return una lista de entrenador
+     */
     public static List<Entrenador> getAll(){
         List<Entrenador> entrenadores = new ArrayList<>();
         try {
@@ -101,7 +104,11 @@ public class Entrenador {
     }   
     
     
-    
+    /**
+     * Busca un entrenador por su id
+     * @param id Valor del id del entrenador
+     * @return Un entrenador de la base de datos 
+     */
         public static Entrenador getById(int id){
         Entrenador r = new Entrenador();
         
@@ -127,7 +134,13 @@ public class Entrenador {
     }
     
     
-
+        /**
+         * Guarda un registro de entrenador en la base de datos
+         * @param nombre Valor del nombre del entrenador
+         * @param apodo Valor del apodo del entrenador
+         * @param imagen Valor de la imagen del entrenador
+         * @return true si se guardó exitosamente, de lo contrario false.
+         */
     public static boolean save(String nombre, String apodo, String imagen){
         boolean resultado = false;
         try{
@@ -147,7 +160,14 @@ public class Entrenador {
         return resultado;
     }
     
-    
+    /**
+     * Metodo para editar la información de un entrenador
+     * @param nombre valor del nombre de un entrenador
+     * @param apodo valor del apodo de un entrenador
+     * @param imagen valor de la imagen de un entrenador
+     * @param id valor del id del entrenador
+     * @return true si la edición se realizó exitosamente y false si no se realizó
+     */
         public static boolean edit(String nombre, String apodo, String imagen, int id){
         boolean resultado = false;
         try{
@@ -168,7 +188,11 @@ public class Entrenador {
         return resultado;
     }  
     
-    
+    /**
+     * Metodo para eliminar un entrenador
+     * @param id Valor del id de entrenador
+     * @return true si el responsable se eliminó exitosamente y false si no.
+     */
         public static boolean delete(int id){
         boolean resultado = false;
         try{

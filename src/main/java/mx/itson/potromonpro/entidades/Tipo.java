@@ -14,7 +14,7 @@ import java.util.List;
 import mx.itson.potromonpro.persistencia.Conexion;
 
 /**
- *
+ * Clase de los atributos y métodos de la entidad tipo
  * @author Akane
  */
 public class Tipo {

@@ -8,14 +8,13 @@ package mx.itson.potromonpro.entidades;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import mx.itson.potromonpro.persistencia.Conexion;
 
 /**
- *
+ * Clase de los atributos y métodos de la entidad potromon
  * @author Akane
  */
 public class Potromon {
@@ -119,7 +118,7 @@ public class Potromon {
     }
 
     
-       private int id;
+    private int id;
     private String nombre;
     private String descripcion;
     private String listaHabilidades; 
@@ -127,7 +126,10 @@ public class Potromon {
     private int puntaje;
     private String imagen;
     
-    
+    /**
+     Obtiene todos los potromones de la base de datos
+     * @return una lista de potromon
+     */
     public static List<Potromon> getAll(){
         List<Potromon> potromones = new ArrayList<>();
 
@@ -155,7 +157,16 @@ public class Potromon {
                     }
     return potromones;
 }
-    
+    /**
+     * Guarda un registro de potromon en la base de datos
+     * @param nombre Valor del nombre del potromon
+     * @param descripcion Valor de la descripcipon del potromon
+     * @param listaHabilidades Valor de la listaHabilidades del potromon
+     * @param rutaImagen  Valor de la rutaImagen de potromon
+     * @param entrenador Valor del entrenador del potromon
+     * @param puntaje Valor del puntaje del potromon
+     * @return true si se guardó correctamente y false si no
+     */
     public static boolean save(String nombre, String descripcion, String listaHabilidades, String rutaImagen, int entrenador, int puntaje) {
     boolean resultado = false;
     try {
@@ -181,8 +192,8 @@ public class Potromon {
     
     /**
      * Sirve para obtener y añadir el ID de un elemento a la tabla
-     * @param id
-     * @return 
+     * @param id Valor del id de potromon
+     * @return Un potromon de la base de datos
      */
    public static Potromon getById(int id) {
     Potromon p = null;
@@ -211,6 +222,12 @@ public class Potromon {
     return p;
 }
 
+   /**
+    * Actualiza el puntaje de un potromon en la base de datos
+    * @param potromonId Valor del id del potromon
+    * @param nuevoPuntaje Valor del nuevoPuntaje del potromon
+    * @return true si es puntaje fue actualizado correctamente y false si no
+    */
     public static boolean actualizarPuntaje(int potromonId, int nuevoPuntaje) {
     boolean resultado = false;
     try {
@@ -229,7 +246,17 @@ public class Potromon {
 }
 
         
-    
+    /**
+     * Metodo para editar la información de un potromon
+     * @param nombre valor del nombre del potromon
+     * @param descripcion valor de la descripción del potromon
+     * @param listaHabilidades Valor de la listahabilidades del potromon
+     * @param imagen Valor de la imagen del potromon
+     * @param entrenador Valor de entrendor del potromon
+     * @param puntaje Valor de puntaje del potromon
+     * @param potromonId valor del id del potromon
+     * @return true si se editó exitosamente de lo contrario false
+     */
         public static boolean edit(String nombre, String descripcion, String listaHabilidades, String imagen, int entrenador, int puntaje, int potromonId){
         boolean resultado = false;
         try{
@@ -254,6 +281,11 @@ public class Potromon {
         return resultado;
     }
         
+        /**
+         * Metodo para eliminar un potromon
+         * @param id Valor del id del potromon
+         * @return true si se eliminó correctamente de lo contrario false
+         */
        public static boolean delete(int id){
         boolean resultado = false;
         try{
