@@ -7,6 +7,7 @@ package mx.itson.potromonpro.entidades;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,6 +96,58 @@ public class Tipo {
         try {
             Connection conexion = Conexion.obtener();
             String query = "SELECT id, nombre, imagen FROM tipos WHERE id = ?";
+            PreparedStatement statement = conexion.prepareStatement(query);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                tipo = new Tipo();
+                tipo.setId(rs.getInt("id"));
+                tipo.setNombre(rs.getString("nombre"));
+                tipo.setImagen(rs.getString("imagen"));
+            }
+
+            conexion.close();
+        } catch (Exception ex) {
+            System.err.println("Error al buscar el tipo por ID: " + ex.getMessage());
+        }
+        return tipo;
+    }
+    
+     public boolean agregarTipo(int potromonId, int tipoId) {
+    String query = "INSERT INTO potromon_tipos (potromon_id, tipo_id) VALUES (?, ?)";
+    try (Connection conn = Conexion.obtener(); 
+         PreparedStatement stmt = conn.prepareStatement(query)) {
+        stmt.setInt(1, potromonId);
+        stmt.setInt(2, tipoId);
+        return stmt.executeUpdate() > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+   
+   public boolean eliminarTipo(int potromonId, int tipoId) {
+    String query = "DELETE FROM potromon_tipos WHERE potromon_id = ? AND tipo_id = ?";
+    try (Connection conn = Conexion.obtener(); 
+         PreparedStatement stmt = conn.prepareStatement(query)) {
+        stmt.setInt(1, potromonId);
+        stmt.setInt(2, tipoId);
+        return stmt.executeUpdate() > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+
+   
+   public static Tipo obtenerTipos(int id) {
+        Tipo tipo = null;
+        try {
+            Connection conexion = Conexion.obtener();
+            String query = "SELECT t.id, t.nombre, t.imagen FROM tipos t " +
+                   "INNER JOIN potromon_tipos pt ON t.id = pt.tipo_id " +
+                   "WHERE pt.potromon_id = ?";
             PreparedStatement statement = conexion.prepareStatement(query);
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();

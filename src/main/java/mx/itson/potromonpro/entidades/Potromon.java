@@ -271,52 +271,9 @@ public class Potromon {
         return resultado;
     }
        
-       // AQUI INICIAN LOS METODOS DE LA TABLA TIPO_POTROMON
+     
        
-   public boolean agregarTipo(int potromonId, int tipoId) {
-    String query = "INSERT INTO potromon_tipos (potromon_id, tipo_id) VALUES (?, ?)";
-    try (Connection conn = Conexion.obtener(); 
-         PreparedStatement stmt = conn.prepareStatement(query)) {
-        stmt.setInt(1, potromonId);
-        stmt.setInt(2, tipoId);
-        return stmt.executeUpdate() > 0;
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return false;
-    }
-}
    
-   public boolean eliminarTipo(int potromonId, int tipoId) {
-    String query = "DELETE FROM potromon_tipos WHERE potromon_id = ? AND tipo_id = ?";
-    try (Connection conn = Conexion.obtener(); 
-         PreparedStatement stmt = conn.prepareStatement(query)) {
-        stmt.setInt(1, potromonId);
-        stmt.setInt(2, tipoId);
-        return stmt.executeUpdate() > 0;
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return false;
-    }
-}
-
-   public List<Tipo> obtenerTipos(int potromonId) {
-    String query = "SELECT t.id, t.nombre, t.imagen FROM tipos t " +
-                   "INNER JOIN potromon_tipos pt ON t.id = pt.tipo_id " +
-                   "WHERE pt.potromon_id = ?";
-    List<Tipo> tipos = new ArrayList<>();
-    try (Connection conn = Conexion.obtener(); 
-         PreparedStatement stmt = conn.prepareStatement(query)) {
-        stmt.setInt(1, potromonId);
-        ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            Tipo tipo = new Tipo(rs.getInt("id"), rs.getString("nombre"), rs.getString("imagen"));
-            tipos.add(tipo);
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-    return tipos;
-}
 
 
 }

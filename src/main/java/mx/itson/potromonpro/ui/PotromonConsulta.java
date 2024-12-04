@@ -10,10 +10,12 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import mx.itson.potromonpro.entidades.Potromon;
+import mx.itson.potromonpro.entidades.Tipo;
 import mx.itson.potromonpro.grafico.BackgroundPanel;
 import mx.itson.potromonpro.grafico.Fuente;
 
@@ -40,44 +42,54 @@ public class PotromonConsulta extends javax.swing.JDialog {
         this.id = id;
         if(id != 0) {    
             Potromon p = Potromon.getById(id);
+            Tipo t = Tipo.obtenerTipos(id);
             lblNombre.setText(p.getNombre());
             lblEntrenador.setText(p.getEntrenador().getNombre());
             lblPuntaje.setText(String.valueOf(p.getPuntaje()));
+            txtHabilidades.setText(p.getDescripcion());
+            txtDescripcion.setText(p.getListahabilidades()); 
             
             ImageIcon potromonImagen = new ImageIcon(p.getImagen());
-            Image img = potromonImagen.getImage();  
-            Image resizedImg = img.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
+            Image imgPotromon = potromonImagen.getImage();  
+            Image resizedImg = imgPotromon.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
             potromonImagen = new ImageIcon(resizedImg);
             lblImagen.setIcon(potromonImagen);
             
-            txtHabilidades.setText(p.getDescripcion());
-            txtDescripcion.setText(p.getListahabilidades());                  
+            ImageIcon tipo1 = new ImageIcon(t.getImagen());
+            Image imgTipo1 = tipo1.getImage();  
+            Image resizedImgTipo1 = imgTipo1.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
+            tipo1 = new ImageIcon(resizedImgTipo1);
+            lblTipo1.setIcon(tipo1);
+            
+            
+            
+            txtHabilidades.setLineWrap(true);  // Activa el ajuste de línea
+            txtHabilidades.setWrapStyleWord(true);  // Ajusta las palabras completas, no las separa
+            txtHabilidades.setEditable(false);  // Si no deseas que se pueda editar
+            txtHabilidades.setPreferredSize(new java.awt.Dimension(250, 100));  // Ajusta el tamaño del área de texto (250px de ancho, 100px de alto)
+
+            txtDescripcion.setLineWrap(true);  // Activa el ajuste de línea
+            txtDescripcion.setWrapStyleWord(true);  // Ajusta las palabras completas, no las separa
+            txtDescripcion.setEditable(false);  // Si no deseas que se pueda editar
+            txtDescripcion.setPreferredSize(new java.awt.Dimension(250, 100));
+       
+            JLabel[] labelsNombre = {lblNombre, lbl1};
+            Fuente.aplicarFuente(labelsNombre, 13f);  // Aplica la fuente a los JLabel con tamaño 18
+    
+            JLabel[] labelsEntPts = {lblEntrenador, lblPuntaje};
+            Fuente.aplicarFuente(labelsEntPts, 10f);  // Aplica la fuente a los JLabel con tamaño 18
+
+            JComponent[] textoHabilidades = {txtHabilidades, txtDescripcion};
+            Fuente.aplicarFuente(textoHabilidades, 8f); 
+
+            JComponent[] textoDescripcion = {txtDescripcion};
+            Fuente.aplicarFuente(textoDescripcion, 9f);
+
+            JLabel[] labels2 = {lbl2, lbl3};
+            Fuente.aplicarFuente(labels2, 10f);
        }
         
-       txtHabilidades.setLineWrap(true);  // Activa el ajuste de línea
-       txtHabilidades.setWrapStyleWord(true);  // Ajusta las palabras completas, no las separa
-       txtHabilidades.setEditable(false);  // Si no deseas que se pueda editar
-       txtHabilidades.setPreferredSize(new java.awt.Dimension(250, 100));  // Ajusta el tamaño del área de texto (250px de ancho, 100px de alto)
-
-       txtDescripcion.setLineWrap(true);  // Activa el ajuste de línea
-       txtDescripcion.setWrapStyleWord(true);  // Ajusta las palabras completas, no las separa
-       txtDescripcion.setEditable(false);  // Si no deseas que se pueda editar
-       txtDescripcion.setPreferredSize(new java.awt.Dimension(250, 100));
        
-       JLabel[] labelsNombre = {lblNombre, lbl1};
-Fuente.aplicarFuente(labelsNombre, 13f);  // Aplica la fuente a los JLabel con tamaño 18
-    
-        JLabel[] labelsEntPts = {lblEntrenador, lblPuntaje};
-Fuente.aplicarFuente(labelsEntPts, 10f);  // Aplica la fuente a los JLabel con tamaño 18
-
-JComponent[] textoHabilidades = {txtHabilidades, txtDescripcion};
-Fuente.aplicarFuente(textoHabilidades, 8f); 
-
-JComponent[] textoDescripcion = {txtDescripcion};
-Fuente.aplicarFuente(textoDescripcion, 9f);
-
-    JLabel[] labels2 = {lbl2, lbl3};
-Fuente.aplicarFuente(labels2, 10f);
     
        
    }
@@ -102,6 +114,8 @@ Fuente.aplicarFuente(labels2, 10f);
         lbl1 = new javax.swing.JLabel();
         lbl2 = new javax.swing.JLabel();
         lbl3 = new javax.swing.JLabel();
+        lblTipo1 = new javax.swing.JLabel();
+        lblTipo2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -127,6 +141,8 @@ Fuente.aplicarFuente(labels2, 10f);
 
         lbl3.setText("Puntaje:");
 
+        lblTipo1.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -140,10 +156,6 @@ Fuente.aplicarFuente(labels2, 10f);
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(34, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -159,12 +171,21 @@ Fuente.aplicarFuente(labels2, 10f);
                                         .addComponent(lbl1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(37, 37, 37))))))
+                                .addGap(37, 37, 37))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblTipo1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblTipo2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(34, 34, 34))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -176,11 +197,15 @@ Fuente.aplicarFuente(labels2, 10f);
                             .addComponent(lbl3)
                             .addComponent(lblEntrenador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(71, 72, Short.MAX_VALUE)
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblTipo1, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                            .addComponent(lblTipo2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(54, Short.MAX_VALUE)
                         .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,6 +270,8 @@ Fuente.aplicarFuente(labels2, 10f);
     private javax.swing.JLabel lblImagen;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblPuntaje;
+    private javax.swing.JLabel lblTipo1;
+    private javax.swing.JLabel lblTipo2;
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextArea txtHabilidades;
     // End of variables declaration//GEN-END:variables
