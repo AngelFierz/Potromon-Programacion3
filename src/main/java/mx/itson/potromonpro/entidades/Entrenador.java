@@ -172,7 +172,7 @@ public class Entrenador {
         boolean resultado = false;
         try{
             Connection conexion = Conexion.obtener();
-            String consulta = "DELETE FROM entrenador WHERE entrenador_id=?";
+            String consulta = "DELETE FROM entrenador WHERE id=?";
             PreparedStatement statement = conexion.prepareStatement(consulta);
             statement.setInt(1, id);
             

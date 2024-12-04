@@ -5,6 +5,7 @@
 package mx.itson.potromonpro.ui;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import mx.itson.potromonpro.entidades.Entrenador;
 import mx.itson.potromonpro.entidades.Potromon;
@@ -146,10 +147,25 @@ public class EntrenadorListado extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-//falta codigo+
+
+        int renglon = tblEntrenador.getSelectedRow();
+        int idEntrenador = Integer.parseInt(tblEntrenador.getModel().getValueAt(renglon, 0).toString());
+        
+        if(JOptionPane.showConfirmDialog(this, "Estas seguro que desea eliminar el registro?", "Eliminar registro", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+        
+     if(Entrenador.delete(idEntrenador)){
+         JOptionPane.showMessageDialog(this, "El registro se elimino con exito", "Registro eliminado", JOptionPane.INFORMATION_MESSAGE);
+         cargarTable();
+     }
+     else {
+         JOptionPane.showMessageDialog(this, "Ocurrio un error al eliminar el registro", "Error", JOptionPane.ERROR_MESSAGE);
+     }
+    }
+     
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    
+
         private void cargarTable(){
         List<Entrenador> entrenadores = Entrenador.getAll();
         DefaultTableModel modeloTabla = (DefaultTableModel)tblEntrenador.getModel();
