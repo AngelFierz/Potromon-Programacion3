@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import mx.itson.potromonpro.entidades.Entrenador;
 import mx.itson.potromonpro.entidades.Potromon;
+import mx.itson.potromonpro.entidades.Tipo;
 
 /**
  *
@@ -41,6 +42,7 @@ private File archivoImagen;
         
        Thread thread = new Thread(() -> {
            cargarEntrenadores();
+           cargarTipos();
         });
        thread.start();
         
@@ -55,6 +57,19 @@ private File archivoImagen;
     
     for (Entrenador entrenador : entrenadores) {
         cmbEntrenador.addItem(entrenador);  
+    }
+    }
+    
+    private void cargarTipos() {
+    
+    List<Tipo> tipos = Tipo.getAll();
+    
+   
+    cmbEntrenador.removeAllItems();
+    
+    
+    for (Tipo tipo : tipos) {
+        cmbTipo.addItem(tipo);  
     }
 }
 
@@ -86,7 +101,7 @@ private File archivoImagen;
         cmbEntrenador = new javax.swing.JComboBox<>();
         btnSeleccionarImagen = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbTipo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -137,7 +152,7 @@ private File archivoImagen;
             }
         });
 
-        jLabel7.setText("jLabel7");
+        jLabel7.setText("Tipo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,7 +162,7 @@ private File archivoImagen;
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAceptar)
                         .addGap(74, 74, 74))
@@ -230,7 +245,7 @@ private File archivoImagen;
                         .addGap(19, 19, 19))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -352,7 +367,7 @@ private File archivoImagen;
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnSeleccionarImagen;
     private javax.swing.JComboBox<Entrenador> cmbEntrenador;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Tipo> cmbTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
