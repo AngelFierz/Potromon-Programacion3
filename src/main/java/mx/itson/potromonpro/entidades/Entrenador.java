@@ -108,7 +108,7 @@ public class Entrenador {
         try{
             
             Connection conexion = Conexion.obtener();
-            String query = "SELECT id, nombre, apodo FROM entrenador WHERE id = ?";
+            String query = "SELECT id, nombre, apodo, imagen FROM entrenador WHERE id = ?";
             PreparedStatement statement = conexion.prepareStatement(query);
             statement.setInt(1,id);
             
@@ -117,6 +117,7 @@ public class Entrenador {
                 r.setId(rs.getInt(1));
                 r.setNombre(rs.getString(2));
                 r.setApodo(rs.getString(3));
+                r.setImagen(rs.getString(4));
             }
         } catch (Exception ex) {
                 System.err.println("Ocurrió un error: " + ex.getMessage());  

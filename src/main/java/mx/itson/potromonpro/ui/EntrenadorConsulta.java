@@ -4,6 +4,8 @@
  */
 package mx.itson.potromonpro.ui;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import mx.itson.potromonpro.entidades.Entrenador;
 
 /**
@@ -25,6 +27,12 @@ int id;
             Entrenador r = Entrenador.getById(id);
             txtNombre.setText(r.getNombre());
             txtApodo.setText(r.getApodo());
+            
+            ImageIcon entrenadorImagen = new ImageIcon(r.getImagen());
+            Image imgEntrenador = entrenadorImagen.getImage();  
+            Image resizedImg = imgEntrenador.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
+            entrenadorImagen = new ImageIcon(resizedImg);
+            lblImagen.setIcon(entrenadorImagen);
         }
     }
 
@@ -43,8 +51,9 @@ int id;
 
         txtNombre = new javax.swing.JLabel();
         txtApodo = new javax.swing.JLabel();
+        lblImagen = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         txtNombre.setText("jLabel1");
 
@@ -55,20 +64,27 @@ int id;
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(127, 127, 127)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtApodo)
-                    .addComponent(txtNombre))
-                .addContainerGap(236, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(176, 176, 176)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtApodo)
+                            .addComponent(txtNombre)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addContainerGap()
                 .addComponent(txtNombre)
-                .addGap(33, 33, 33)
+                .addGap(29, 29, 29)
                 .addComponent(txtApodo)
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
@@ -118,6 +134,7 @@ int id;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblImagen;
     private javax.swing.JLabel txtApodo;
     private javax.swing.JLabel txtNombre;
     // End of variables declaration//GEN-END:variables
