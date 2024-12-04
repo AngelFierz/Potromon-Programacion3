@@ -4,7 +4,12 @@
  */
 package mx.itson.potromonpro.ui;
 
+import java.awt.Image;
+import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import mx.itson.potromonpro.entidades.Entrenador;
 
 /**
@@ -12,7 +17,7 @@ import mx.itson.potromonpro.entidades.Entrenador;
  * @author dzlan
  */
 public class EntrenadorForm extends javax.swing.JDialog {
-
+String rutaRelativa;
 int id;
     /**
      * Creates new form EntrenadoresForm
@@ -76,6 +81,11 @@ int id;
         });
 
         btnImagen.setText("Seleccionar archivo...");
+        btnImagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImagenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,7 +142,7 @@ int id;
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         String nombre = txtNombre.getText();
         String apodo = txtApodo.getText();
-        String imagen = btnImagen.getText();
+        String imagen = rutaRelativa;
 
 
         
@@ -165,6 +175,35 @@ int id;
     private void txtApodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApodoActionPerformed
       
     }//GEN-LAST:event_txtApodoActionPerformed
+
+    private void btnImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImagenActionPerformed
+        // Crear un JFileChooser para seleccionar el archivo de imagen
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Seleccionar Imagen");
+
+    // Filtrar solo archivos de imagen
+    FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de imagen", "png", "jpg", "jpeg", "gif");
+    fileChooser.setFileFilter(filter);
+
+    // Mostrar el JFileChooser y verificar si se seleccionó un archivo
+    int result = fileChooser.showOpenDialog(this);
+    if (result == JFileChooser.APPROVE_OPTION) {
+        // Obtener el archivo seleccionado
+        File file = fileChooser.getSelectedFile();
+
+        // Obtener el nombre de la imagen
+        String nombreImagen = file.getName();
+
+        // Generar la ruta relativa que se almacenará en la base de datos
+        rutaRelativa = "src/main/resources/Profes/" + nombreImagen;
+
+        // Mostrar la imagen seleccionada en la interfaz (Vista previa)
+        ImageIcon icon = new ImageIcon(file.getAbsolutePath());
+        
+
+
+    }
+    }//GEN-LAST:event_btnImagenActionPerformed
 
     /**
      * @param args the command line arguments
